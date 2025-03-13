@@ -149,7 +149,6 @@ class PlanetTk:
         Returns:
             PlanetAlpha: The grid object.
         """
-        print("hello1")
         return self.__planetAlpha
 
     def __repr__(self):
