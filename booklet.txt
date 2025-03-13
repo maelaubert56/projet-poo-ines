@@ -1,0 +1,1807 @@
+YSINL2A1 : Initiation `a la Programmation
+Orient´ee Objet (Python) – UNICAEN 2024−2025
+D´eroulement : le cours est dispens´e sur 10 semaines comprenant chacune 2h de cours magistral, 1h de travail
+pratique d’application des notions vues en cours et 2h de travail pratique li´e au projet fil rouge de l’ann´ee.
+L’´evaluation se fera sur un QCM de 1h30 couvrant les cours magistraux, les travaux pratiques et le projet fil
+rouge (2/3 de la note globale) et le travail/rapport/oral des fonctionnalit´es libres du projet fil rouge en trinˆome
+(1/3 de la note globale).
+Contenu : les 3 premi`eres semaines sont r´eserv´ees aux rappels importants sur les principes de la programma-
+tion imp´erative en langage Python. Les semaines suivantes int´egreront petit `a petit diff´erents concepts de la
+programmation orient´ee objet (POO).
+Recommandations cours magistraux: les cours magistraux sont indispensables `a une bonne r´eussite `a cette
+unit´e pour au moins deux raisons :
+— 1/3 du QCM peut porter sur des questions abord´ees uniquement lors de ces cours
+— les TP peuvent ˆetre volontairement longs et sans corrections document´ees. En revanche une correction
+des points cl´es de la plupart des TP sera faite `a travers de nombreux exemples expliqu´es directement au
+tableau ou par projection des programmes lors du cours de la semaine correspondante.
+Recommandations TP : des fichiers .py peuvent ˆetre fournis. Dans se cas, ils contiennent les signatures des
+fonctions et les consignes en docstring). Il est interdit de modifier les signatures :
+— le __main__ sera sous la forme de variables et d’assertions de tests associ´ees `a chaque fonction. Vous ne
+devez pas modifier les tests mais le corps de vos fonctions afin que ceux-ci ne soient plus bloquants. Dans
+cette section, vous pouvez rajouter vos propres tests pour comprendre la provenance de vos erreurs.
+— Les TP non termin´es pendant les horaires r´eserv´es doivent ˆetre termin´es sur son temps personnel avant
+le d´ebut du suivant (les sections en rouge rep´erables comme optionnelles et/ou plus difficiles).
+— un d´epˆot GIT devra contenir l’ensemble des TP r´ealis´es dans l’architecture impos´ee au fur et `a mesure
+des semaines. L’id´eal est de faire un commit apr`es chaque fonction/m´ethode op´erationnelle et un push
+lorsque le TP est termin´e.
+Recommandations projet fil rouge : Il s’agira de construire une application permettant la gestion de 3
+mini-jeux bas´es sur une structure commune (un automate de Conway, un visualisateur de Turmites et un
+Snake)
+— La structure sera impos´ee et construite au fur et a mesure des TP.
+— Les derniers TP seront consacr´es `a la structure de base, par trinˆome d’´etudiants; et votre temps personnel
+`a l’ajout d’extensions. En amont, une premi`ere version du rapport sera remise ne contenant que le cahier
+des charges fonctionnel, le diagramme des classes et la r´epartition du travail pr´evu par ´etudiant.
+— Le rapport final compl´etera le premier en pr´ecisant le diagramme des classes de la r´ealisation finale, la
+mani`ere dont le groupe s’est r´eparti r´eellement le travail et les difficult´es rencontr´ees (diff´erences entre le
+cahier des charges fonctionnel et les r´ealisations effectives). Un bon travail doit avoir produit environ 80%
+des fonctionnalit´es pr´evues. Moins signalerait un manque de travail, et plus un manque d’ambition;)
+— Le code sera rendu sous la forme d’un d´epˆot GIT (le nombre, la r´egularit´e et la qualit´e des commentaires
+des push par ´etudiants feront partie de la grille d’´evaluation).
+— La derni`ere semaine de TP sera consacr´ee `a un oral pour individualiser la note finale du projet fil rouge.
+1/55
+Enseignants : F. Maurel (CM) - J.-M. Lecarpentier - S. Shupp - Romain H´erault - Djawab Bekkoucha -
+Mariana Brito Azevedo - Amal Mahboubi - Marjorie Redon - Yoann Jacquier
+Programme - vacances : semaine du 17 f´evrier
+Semaine 1 - 6/1/2025 : RAPPELS
+— CM01 : Bases - s´equences - r´ef´erence/valeur, mutable/non mutable - fichiers
+— TP01 : Chaˆınes de caract`eres et distance de Hamming
+— TP02 :
+´ Echelles de mots avec une structure de liste - fichiers (mode lecture)
+Semaine 2 - 13/1/2025 : RAPPELS
+— CM02 : Ensembles - modules tiers (ex : chardet, matplotlib)
+— TP03 :
+´ Echelles de mots avec une structure de dictionnaire - fichiers (mode ´ecriture)
+— TP04 : Encodage des caract`eres - histogrammes de caract`eres
+Semaine 3 - 20/1/2025 : RAPPELS
+— CM03 : Compr´ehension de liste (et de dictionnaire) - structure de grille - versionnage (GIT)
+— TP05 : Gestion d’une liste de personnes
+— TP06 : module grid_manager.py (gestion d’un tore 2D)
+Semaine 4 - 27/1/2025
+— CM04 : Classe et objet - UML - structure d’un POO - Associations
+— TP07 : Imp´eratif vs. OO : de grid_manager `a Grid
+— TP08 : La ferme
+Semaine 5 - 3/2/2025
+— CM05 : Agr´egation - public/brouill´e/priv´e, instance/classe/statique, getter/setter
+— TP09 : Reprises et privatisations
+— TP10 : Exercices suppl´ementaires
+Semaine 6 - 10/2/2025
+— CM06 : H´eritage, red´efinition/surcharge
+— TP11 : De Grid `a¨PlanetAlpha
+— TP12 : Agr´egations et h´eritage par g´en´eralisation ou sp´ecialisation
+Semaine 7 - 24/2/2025
+— CM07 : Sp´ecialisation classes built-in, m´ethodes sp´eciales, POO et tkinter
+— TP13 : Exercices d’application de tkinter
+— TP14 : Affichage d’une PlanetAlpha d’Element
+Semaine 8 - 3/3/2025
+— CM08 : Multih´eriage, classes abstrtaites, interfaces, pr´esentation projet
+— TP15 : De PlanetAlpha `a PlanetTk
+— TP16 : Kick-off projet fil rouge (groupes, GIT, d´epˆot pr´e-rapport)
+Semaine 9 - 10/3/2025
+— CM09 : tkinter, IHM et programmation ´ev´enementielle
+— TP17 et TP18 : Projet fil rouge
+Semaine 10
+— CM10 - 17/3/2025 : Docstring- Pydoc - Questions projet
+— TP19 et TP20 - 31/3/2025 : Oral
+2/55
+1 CM01 (8/1/2024) - RAPPELS prog. imp´erative en Python 3.X
+Notions vues en cours :
+— bonnes pratiques de nommage (convention snake case, constantes vs. variables, espaces, nomenclature)
+— les diff´erents types de s´equences Python selon qu’ils sont mutables (list) ou non (str, tuple).
+— fonctions built-in de base (print, range, len, sum, min, max, all, any) et de cast (bool, int, str, list)
+vs.fonctionsassoci´ees`aunevariableparlanotationpoint´ee(.upper,.index,.append,.extend,.join)
+— passage des param`etres `a une fonction par valeur vs. par r´ef´erence
+— les fichiers textes et leur acc`es en Python (with, open)
+1.1 TP01 - bases - string (1h)
+S01_TP01_template.py : fichier template `a r´ecup´erer sur ecampus et `a compl´eter. Seuls les signatures des
+fonctions et un programme __main__ ne sont indiqu´es. Chaque signature est suivie d’une docstring qui rappelle
+ce qui est attendu. Il s’agit de remplacer l’instruction pass dans le corps de chaque fonction par le code Python
+qui permet de passer les tests qui lui sont associ´es.
+L’interpr´etation du __main__ s’arrˆete sur le premier test non pass´e. Lorsque toutes les m´ethodes seront ´ecrites
+et les tests tous valid´es, le message "Tests all OK" s’affichera.
+Les annotations de typage autoris´ees depuis la version 3.5 du langage Python sont informatives, optionnelles et
+dans tous les cas non prises en compte par l’interpr´eteur. Elles sont utilis´ees dans le texte des questions de ce
+document pour les ´eclairer mais ne doivent pas ˆetre pr´ecis´ees explicitement dans votre code.
+Exemple de codage de la signature message(text: str, sender: str, times: int=1) → str et r´esultats
+d’ex´ecutions (instructions pr´ec´ed´ees de >>>) :
+def message(text , sender , times=1) {
+res = ’ ’
+for i in range(times) {
+res += f"{i+1}. {text}\n"
+}
+return res + f"\t\t\{sender}"
+}
+>>> print(message("Bonne ann´ee 2024 !" , "ChatGPT"))
+1. Bonne ann´ee 2024 !
+ChatGPT
+>>> print(message("Je m’ excuse de la confusion ! Bonne ann´ee 2025..." , "ChatGr´ePT", 2))
+1. Je m’ excuse de la confusion ! Bonne ann´ee 2025...
+2. Je m’ excuse de la confusion ! Bonne ann´ee 2025...
+ChatGr´ePT
+Remarque : dans l’exemple ci-dessus, utilisation pratique des f-strings possible depuis python 3.6.
+Attention :respectez bien l’´enonc´e de la question lorsqu’il impose de r´eutiliser des fonctions d´ej`a ´ecrites dans
+le TP en cours voire dans un TP pr´ec´edent!
+3/55
+1.1.1 Exercice
+are_chars(chars: str, string: str) → bool | Retourne True si tous les caract`eres de la chaˆıne chars
+apparaissent au moins une fois dans la chaˆıne string. False sinon.
+>>> are_chars( ’ test ’ , ’est ’) , are_chars( ’ tester ’ , ’est ’)
+(True , False)
+1.1.2 Exercice
+Les 3 fonctions suivantes simulent un brin d’ADN sous la forme d’une chaˆıne de caract`eres combinant les lettres
+A, T, G et C pour repr´esenter les bases susceptibles de le composer. L’Ad´enine (A) est la base compl´ementaire
+de la Thymine (T) et la Guanine (G) est la compl´ementaire de la Cytozine (C). Les bases ont ´egalement une
+masse molaire :
+— A p`ese 135 g/mol
+— T p`ese 126 g/mol
+— G p`ese 151 g/mol
+— C p`ese 111 g/mol
+1. is_dna(dna: str) → bool | Retourne True si le brin dna contient uniquement des bases A, T, G ou C
+(et au moins une). False sinon. Il faudra utiliser la fonction are_chars.
+>>> is_dna( ’GTATTCTCA’) , is_dna( ’GTAUTCTCA’)
+(True , False)
+2. get_molar_mass(dna: str) → int | Retourne 0 si dna n’est pas un brin d’ADN. Sinon, retourne sa
+masse molaire. Il faudra utiliser la fonction is_dna.
+>>> get_molar_mass( ’GTATTCTCA’)
+1147
+3. get_complementary(dna: str) → str | Si dna est un brin, retourne son compl´ementaire. Sinon re-
+tourne None. Il faudra utiliser la fonction is_dna.
+>>> get_complementary( ’GTATTCTCA’) , get_complementary( ’GTAUTCTCA’)
+(CATAAGAGT, None)
+1.1.3 Exercice
+Les 4 fonctions suivantes permettent de jouer un peu avec les mots.
+1. get_first_deleted(char: char, string: str) → str | Retourne la chaˆıne string amput´ee de la
+premi`ere occurrence du caract`ere char.
+>>> get_first_deleted ( ’r ’ , "aeeigmnrrrstuwz")
+"aeeigmnrrstuwz"
+4/55
+2. is_scrabble(word: str, letters: str) → bool | Retourne True si le mot word peut ˆetre construit
+comme au jeu du Scrabble `a partir des lettres de la chaˆıne letters (les lettres r´ep´et´ees dans word
+seront dont ´egalement r´ep´et´ees au moins le mˆeme nombre de fois dans letters). False sinon. Il faudra
+obligatoirement utiliser get_first_deleted.
+>>> is_scrabble("marguerites", "gewurztraminers") , is_scrabble("rose", "gewurztraminers")
+(True , False)
+3. is_anagram(word1: str, word2: str) → bool | Retourne True si word1 et word2 sont deux ana-
+grammes. False sinon. Il faudra obligatoirement utiliser is_scrabble.
+>>> is_anagram("gewurztraminers", "aeeigmnrrrstuwz")
+True
+4. get_hamming_distance(word1: str, word2: str) → int | Retourne la distance de Hamming entre
+word1 et word2 ou−1 si son calcul n’est pas possible. La distance de Hamming entre deux chaˆınes de
+mˆeme longueur correspond au nombre de positions auxquelles sont associ´ees des caract`eres diff´erents.
+>>> get_hamming_distance("gewurztraminers", "aeeigmnrrrstuwz")
+13
+1.2 TP02 - fichiers - list - tuple (2h)
+resources.zip : cette archive est `a d´ecompresser dans un r´epertoire TP_POO. Elle organise dans un r´epertoire
+TEXTS les ressources n´ecessaires `a certains TP. En particulier le fichier fr_long_dict_cleaned.txt qui sera
+utilis´e dans ce TP (il contient 242818 mots du fran¸cais en majuscule et sans accents).
+Trois autres fichiers doivent ˆetre rajout´es `a la racine du r´epertoire TP_POO.
+config.py : un module `a importer dans tout programme qui doit utiliser les ressources fournies par
+resources.zip. Il contient des variables globales pointant vers les diff´erents r´epertoires (chemins relatifs au
+r´epertoire TP_POO) qui organisent les fichiers par th`emes (livres, dictionnaires, politiques, linguistiques...) :
+— PATH_ALPHABET = ’TEXTS/IN/RESOURCES/CHARACTERS/’
+— PATH_DICTIONARIES = ’TEXTS/IN/RESOURCES/WORDS/’
+— PATH_BOOKS = ’TEXTS/IN/BOOKS/’
+— PATH_ARTICLES = ’TEXTS/IN/ARTICLES/’
+— PATH_DH = ’TEXTS/IN/POLITICAL/DH/’
+— PATH_WISHES = ’TEXTS/IN/POLITICAL/WISHES/’
+— PATH_OUT = ’TEXTS/OUT/’
+S01_TP01_template.py : fichier template compl´et´e du TP pr´ec´edent.
+S01_TP02_template.py : fichier template `a compl´eter pour r´ealiser ce TP. Les 3 premi`eres lignes d’importa-
+tion servent `a r´ecup´erer (1) les variables globales du fichier config.py, (2) la fonction get_hamming_distance
+r´ealis´ee lors du TP pr´ec´edent et (3) la fonction perf_counter du module time utile pour mesurer les perfor-
+mances de votre code.
+Attention : Assurez-vous de respecter l’arborescence d´ecrite ci-apr`es et que les importations fonctionnent
+avant de commencer les exercices du TP! .
+5/55
+TP_POO
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |_____ OTHERS
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | |_____ WISHES
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| |_____ OUT |_____ WORDS
+| |_____ fr_long_dict_cleaned.txt
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+from config import *
+from S01_TP01_template import get_hamming_distance
+from time import perf_counter
+Les 7 fonctions suivantes ont pour finalit´e de construire des « ´echelles » entre deux mots. Il s’agit de trouver
+dans un fichier une suite de mots ayant tous une distance de Hamming de 1 `a la fois avec le pr´ec´edent et avec
+le suivant. E.g : de ’TOUT’ `a ’RIEN’ en 6 ´etapes : [’TOUT’, ’BOUT’, ’BRUT’, ’BRUN’, ’BREN’, ’BIEN’,
+’RIEN’]. Le fichier des exemples contient 242818 mots du fran¸cais en majuscule et sans accents (1 par ligne).
+Attention tous les mots du fichier finissent donc par le caract`ere ’\n’ (retour `a la ligne).
+1. get_words_from_dictionnary(file_path: str, length: int = None) → list[str] | Retourne la
+liste des mots du fichier de nom file_path si length vaut None. Sinon retourne la liste des mots de
+longueur length.
+>>> DICT_NAME = PATH_DICTIONARIES + "fr_long_dict_cleaned . txt"
+>>> words6 = get_words_from_dictionary(DICT_NAME, 6)
+>>> print(words6 [:9])
+[ ’A− T−IL ’ , ’ABAQUE’ , ’ABATEE’ , ’ABATTE’ , ’ABATTU’ , ’ABBAYE’ , ’ABCEDE’ , ’ABERRE’ , ’ABETIE’]
+2. get_words_hamming(word: str, words: list[str], haming_distance: int) → list[str] | Re-
+tourne une sous-liste de la liste de mots words qui sont `a une distance de Hamming hamming_distance
+du mot word.
+>>> get_words_hamming("ORANGE", words6 , 0)
+[ ’ORANGE’]
+>>> get_words_hamming("ORANGE", words6 , 1)
+[ ’FRANGE’ , ’GRANGE’ , ’ORANGS’ , ’ORANTE’ , ’ORONGE’]
+>>> get_words_hamming("ORANGE", words6 , 2)
+[ ’BRANDE’ , ’BRANLE’ , ’BRANTE’ , ’CHANGE’ , ’CRANTE’ , ’GRANDE’ , ’GRINGE’ , ’ORACLE’ , ’ORANTS’ ,
+’TRANSE’ , ’URANIE’]
+3. is_scale(scale: list[str]) → bool | Retourne True si scale est une ´echelle de mot correctement
+construite. False sinon.
+>>> is_scale ([ ’SUD’ , ’SUT’ , ’EUT’ , ’EST’])
+True
+>>> is_scale ([ ’FRANGE’ , ’GRANGE’ , ’ORANGS’ , ’ORANTE’ , ’ORONGE’])
+False
+6/55
+4. is_perfect_scale(scale: list[str]) → bool|RetourneTruesil’´echelledemotsscaleestparfaite.
+False sinon. Une ´echelle de mots est dite parfaite si le nombre d’´etape pour passer du mot de d´epart au
+mot cible est ´egal `a leur distance de hamming.
+>>> is_perfect_scale ([ ’SUD’ , ’SUT’ , ’EUT’ , ’EST’])
+True
+5. get_removed_words(words_to_remove: list[str], all_words: list[str]) → list[str] | Re-
+tourne une sous-liste des mots de all_words en retirant ceux de words_to_remove.
+>>> new_word6 = get_removed_words([ ’A− T−IL ’ , ’ABATTU’] , word6)
+>>> print(words6 [:9])
+[ ’A− T−IL ’ , ’ABAQUE’ , ’ABATEE’ , ’ABATTE’ , ’ABATTU’ , ’ABBAYE’ , ’ABCEDE’ , ’ABERRE’ , ’ABETIE’]
+>>> print(new_words6 [:9])
+[ ’ABAQUE’ , ’ABATEE’ , ’ABATTE’ , ’ABBAYE’ , ’ABCEDE’ , ’ABERRE’ , ’ABETIE’ , ’ABETIR’ , ’ABETIS’]
+6. get_next_scales(scale: list[str], words: str) → list[list[str]] | retourne la liste des
+´echelles de mots possibles constitu´ees par l’´echelle de mot scale et un mot de la liste words.
+>>> get_next_scales ([ ’CHANGE’ , ’CHANTE’] , word6)
+[[ ’CHANGE’ , ’CHANTE’ , ’CHANCE’] , [ ’CHANGE’ , ’CHANTE’ , ’CHANTA’] , [ ’CHANGE’ , ’CHANTE’ ,
+’CHANTS’] , [ ’CHANGE’ , ’CHANTE’ , ’CHARTE’] , [ ’CHANGE’ , ’CHANTE’ , ’CHASTE’] , [ ’CHANGE’ ,
+’CHANTE’ , ’CHATTE’] , [ ’CHANGE’ , ’CHANTE’ , ’CRANTE’]]
+7. get_scale(file_path: str, word1: str, word2: str) → list[str] | Retourne une ´echelle de
+mots entre word1 et word2 avec les mots du dictionnaire file_path. Le principe de l’algorithme est
+d’enfiler les ´echelles `a tester dans une liste (initialis´ee avec l’´echelle contenant le seul mot word1. Tant
+qu’il reste des ´echelles `a tester, la premi`ere est s´electionn´ee. Si elle se termine par le mot word2 alors cette
+solution est retourn´ee; sinon toutes les ´echelles construites `a partir de celle-ci plus un mot sont enfil´ees `a
+leur tour en attendant d’ˆetre test´ees. Si aucune ´echelle n’est finalement trouv´ee None est retourn´e. Dans
+l’exemple vous remarquerez cependant grˆace aux tests avec perf_counter (comment´es dans le template)
+que certains temps de calcul, mˆeme sur un ordinateur puissant, ne sont pas raisonnables.
+>>> t1 = perf_counter ()
+>>> print(get_scale(DICT_NAME, ’SUD’ , ’EST’))
+[ ’SUD’ , ’SUT’ , ’EUT’ , ’EST’]
+>>> t2 = perf_counter ()
+>>> print(t2− t1)
+0.41285749999951804
+>>> print(get_scale(DICT_NAME, ’HOMME’ , ’SINGE’))
+[ ’HOMME’ , ’COMME’ , ’COMTE’ , ’CONTE’ , ’CONGE’ , ’SONGE’ , ’SINGE’]
+>>> t3 = perf_counter ()
+>>> print(t3− t2)
+32.78062040000077
+>>> print(get_scale(DICT_NAME, ’EXOS’ , ’MATH’))
+[ ’EXOS’ , ’EROS’ , ’GROS’ , ’GRIS’ , ’GAIS’ , ’MAIS’ , ’MATS’ , ’MATH’]
+>>> t4 = perf_counter ()
+>>> print(t4− t3)
+212.4659079999983
+>>> print(get_scale(DICT_NAME, ’TOUT’ , ’RIEN’))
+[ ’TOUT’ , ’BOUT’ , ’BRUT’ , ’BRUN’ , ’BREN’ , ’BIEN’ , ’RIEN’]
+>>> t5 = perf_counter ()
+>>> print(t5− t4)
+666.6731024999972
+7/55
+2 CM02 (15/1/2024) - RAPPELS prog. imp´erative en Python 3.6>
+Notions vues en cours :
+— les diff´erents types d’ensemble Python selon qu’ils sont mutables (dict, set) ou non (frozenset).
+— fonctions built-in de base (zip, sorted, reversed) et de cast (bytes, dict, set, frozenset) vs. fonc-
+tions associ´ees `a une variable par la notation point´ee (.decode,.lower, .count, .split, .strip, .sort,
+.get, .keys, .values, .items, .update, .add, .discard, .intersection, .union, .difference)
+— m´emoire et modifications in-place vs. not-in-place
+— encodages des caract`eres, fichiers textes vs. binaires et leur acc`es en Python
+— capter et lever une exception
+— fonctionssuppl´ementairesassoci´ees`adesvariablesissuesdesmoduleschardet(.detect)etmatplotlib
+2.1 TP03 - bases - dict (1h)
+TP_POO
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | |_____ WISHES
+| | |
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| | |_____ WORDS
+| | |_____ fr_long_dict_cleaned.txt
+| |_____ OUT
+| |_____ WG
+| |_____ 4.wg
+| |_____ 5.wg
+| |_____ 6.wg
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+from S01_TP02_template import *
+S02_TP03_template.py : fichier template `a compl´eter pour r´ealiser ce TP. L’objectif est d’am´eliorer les per-
+formances de la recherche d’´echelles de mots en utilisant une structure de donn´ees plus adapt´ee. Plutˆot que de
+travailler avec la liste de mots extraits du fichier, nous allons pr´e-calculer les relations entre les mots qui nous
+int´eressent dans des structures de graphe; pour ne pas effectuer plusieurs fois ce calcul qui peut ˆetre long, les
+repr´esentations r´esultantes seront ´egalement sauv´ees dans des fichiers textes (fichiers n.wg avec n la longueur
+des mots du graphe). La figure suivante illustre une petite partie du graphe des mots de 7 lettres qui connecte
+entre eux les mots (les noeuds du graphe) qui sont `a une distance de Haming de 1.
+8/55
+Les 6 fonctions suivantes ont pour finalit´e de construire et sauver dans des fichiers textes les repr´esentations de
+tels graphes; puis de proposer un algorithme de recherche d’´echelles de mots bas´e sur un parcours de graphe en
+largeur d’abord (Breadth-First Search - BFS).
+1. get_words_graph_from_dictionary(file_path: str, length: int) → dict{str: list[str]} |
+Retourne un graphe de mots bidirectionnel : dictionnaire Python dont les cl´es sont les mots de longueur
+length du fichier file_path associ´ees `a la liste des mots qui sont `a une distance de Hamming de 1.
+>>> words_graph_5 = get_words_graph_from_dictionary(DICT_NAME, 5)
+>>> print(words_graph_5[ ’HOMME’])
+[ ’COMME’ , ’GOMME’ , ’HOMIE’ , ’NOMME’ , ’POMME’ , ’SOMME’ , ’TOMME’]
+2. get_length_words(words_graph: dict{str: list[str]}) → int|Retournelalongueurdesmotsdu
+graphe de mots words_graph.
+>>> print(get_length_words(words_graph_5))
+5
+3. words_graph_to_file(path: str, words_graph: dict{str: list[str]}) | Sauve le graphe de mots
+words_graph dans un fichier n.wg du dossier path (n ´etant longueur des mots). Chaque ligne sera com-
+pos´ee des mots repr´esentant une entr´ee de words_graph et la liste des mots associ´es.
+>>> words_graph_to_file(PATH_OUT + ’WG/’, words_graph_5)
+>>> with open(PATH_OUT + ’WG/5.wg’ , ’r ’ , encoding=’utf−8’) as f_in :
+>>> print(f_in . readlines ()[:3])
+[ ’ABACA AGACA\n’ , ’ABATS EBATS\n’ , ’ABBES ABCES ABLES AUBES\n’]
+9/55
+4. get_words_graph_from_file(path: str, length: int) → dict{str: list[str]} | Reconstruit et
+retourne le graphe de mots de longueur length `a partir du fichier length.wg sauv´e dans le dossier path.
+>>> words_graph_5 = get_words_graph_from_file(PATH_OUT + ’WG/’, 5)
+>>> print(words_graph_5[ ’HOMME’])
+[ ’COMME’ , ’GOMME’ , ’HOMIE’ , ’NOMME’ , ’POMME’ , ’SOMME’ , ’TOMME’]
+5. insert_word(new_word: str, words_graph: dict{str: list[str]}) | Ins`ere le nouveau mot
+new_word dans le graphe de mots words_graph s’il n’y est pas d´ej`a. Une Exception sera lev´ee si le
+nouveau mot n’a pas la longueur ad´equate. Attention `a bien repr´esenter toutes les nouvelles connexions
+(le graphe doit rester bidirectionnel). L’exemple a ´et´e r´ealis´e apr`es avoir construit les 25 fichiers pour les
+graphes de mots de longueur 1 `a 25 r´ecup´erables dans une archive sur ecampus.
+>>> insert_word( ’ISA’ , words_graph_5)
+Exception : length mismatch with ISA
+>>> words_graph_3 = get_words_graph_from_file(PATH_OUT + ’WG/’, 3)
+>>> print(words_graph_3[ ’ISA ’])
+KeyError: ’ISA’
+>>> print(words_graph_3[ ’IRA’])
+[ ’ARA’ , ’IRE’]
+>>> insert_word( ’ISA’ , words_graph_3)
+>>> print(words_graph_3[ ’ISA ’])
+[ ’IRA’ , ’OSA’ , ’USA’]
+>>> print(words_graph_3[ ’IRA’])
+[ ’ARA’ , ’IRE’ , ’ISA ’]
+10/55
+6. get_shortest_scale(words_graph: dict{str: list[str]}, starting_word: str, target_word:
+str) → list[str] | Retourne la liste des mots du plus court chemin entre les mots starting_word
+et target_word dans le graphe words_graph. Les deux mots donn´es peuvent ne pas ˆetre dans le
+dictionnaire et doivent donc ˆetre ins´erer dans le graphe avant la recherche d’une solution.
+Il s’agit de maintenir pendant le parcours du graphe en largeur d’abord (1) un dictionnaire Python des
+´el´ements visit´es associ´es `a leur pr´ed´ecesseur et initialis´e `a {starting_word: None}; (2) une liste des
+´el´ements qu’il reste `a explorer initialis´e `a [starting_word].
+Selon les mots qu’il reste `a explorer dans (2) :
+— si (2) est vide, il n’y a pas de solutions. None est retourn´e.
+— si le premier mot de (2) est target_word la solution est trouv´ee. Il suffit d’utiliser le dictionnaire (1)
+pour retrouver la solution en remontant de pr´ed´ecesseur en pr´ed´ecesseur jusqu’`a None.
+— dans les autres cas, le premier mot est retir´e et tous ses voisins non visit´es sont ajout´es en (1)
+avec ce mot comme pr´ed´ecesseur et ´egalement en fin de (2) comme nouvelles solutions `a explorer.
+L’exemple a ´et´e r´ealis´e apr`es avoir construit les 25 fichiers pour les graphes de mots de longueur 1 `a 25.
+Vous remarquerez ´egalement la nette am´elioration des performances.
+>>> t1 = perf_counter ()
+>>> WORDS_GRAPHS = dict ()
+>>> for i in range(1 , 26):
+>>> WORDS_GRAPHS[ i ] = get_words_graph_from_file(PATH_OUT + ’WG/’, i )
+>>> t2 = perf_counter ()
+>>> print(t2− t1)
+0.1911443999997573
+>>> print(get_shortest_scale(WORDS_GRAPHS[5] , ’HOMME’ , ’SINGE’))
+[ ’HOMME’ , ’COMME’ , ’COMTE’ , ’CONTE’ , ’CONGE’ , ’SONGE’ , ’SINGE’]
+>>> t3 = perf_counter ()
+>>> print(t3− t2)
+0.0006738999982189853
+>>> print(get_shortest_scale(WORDS_GRAPHS[5] , ’AVANT’ , ’APRES’))
+[ ’AVANT’ , ’AVENT’ , ’AIENT’ , ’LIENT’ , ’LIENS’ , ’LIEES’ , ’LIRES’ , ’AIRES’ , ’APRES’]
+>>> t4 = perf_counter ()
+>>> print(t4− t3)
+0.0005806000008306
+>>> print(get_shortest_scale(WORDS_GRAPHS[4] , ’TOUT’ , ’RIEN’))
+[ ’TOUT’ , ’BOUT’ , ’BRUT’ , ’BRUN’ , ’BREN’ , ’BIEN’ , ’RIEN’]
+>>> t5 = perf_counter ()
+>>> print(t5− t4)
+0.0010794000008900184
+>>> print(get_shortest_scale(WORDS_GRAPHS[4] , ’MATH’ , ’PURE’))
+[ ’MATH’ , ’MATE’ , ’MARE’ , ’MURE’ , ’PURE’]
+>>> t6 = perf_counter ()
+>>> print(t6− t5)
+0.0003756000005523674
+>>> print(get_shortest_scale(WORDS_GRAPHS[3] , ’SUD’ , ’EST’))
+[ ’SUD’ , ’SUT’ , ’EUT’ , ’EST’]
+>>> t7 = perf_counter ()
+>>> print(t7− t6)
+0.00020149999909335747
+>>> print(get_shortest_scale(WORDS_GRAPHS[3] , ’ISA’ , ’FAB’))
+[ ’ISA’ , ’OSA’ , ’OST’ , ’OIT’ , ’FIT’ , ’FAT’ , ’FAB’]
+>>> t8 = perf_counter ()
+>>> print(t8− t7)
+0.0006093000010878313
+11/55
+2.2 TP04 - bases - dict (2h)
+L’arborescence actuelle de vos dossiers et fichiers utiles `a ce TP devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | | |_____ enDH.txt
+| | | | |_____ frDH.txt
+| | | | |_____ plDH.txt
+| | | | |_____ ruDH.txt
+| | | | |_____ ruDH_source.txt
+| | | |
+| | | |_____ WISHES
+| | |
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| | | |_____ en_alphabet.txt
+| |_____ OUT | |_____ en_diacriticals.txt
+| |_____ WG | |_____ fr_alphabet.txt
+| | |_____ fr_diacriticals.txt
+| | |_____ pl_alphabet.txt
+| | |_____ pl_diacriticals.txt
+| |
+| |_____ WORDS
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+from config import *
+import chardet
+import marplotlib.pyplot as plt
+S02_TP04_template.py : fichier template `a compl´eter pour r´ealiser ce TP. Les 3 premi`eres lignes d’importation
+servent `a r´ecup´erer (1) les variables globales du fichier config.py ainsi que l’acc`es aux fonctions des modules
+(2) chardet et (3) matplotlib. L’objectif g´en´eral de ce TP est de travailler sur des ressources textuelles au
+niveau du traitement des caract`eres (identification des langues, gestion de la vari´et´e des caract`eres selon les
+langues en consid´erant les accents sur les lettres - appel´es diacritiques, et la casse des caract`eres, construction
+et visualisation d’histogrammes de caract`eres).
+Les11 fonctionssuivantespermettentder´ecup´erersouslaformed’unechaˆınedecaract`erelescontenusdefichiers
+textuels et d’en proposer un histogramme de caract`eres. Elles permettent de s’adapter le mieux possibles aux
+contraintes d’encodage des caract`eres dues aux diff´erentes langues possibles de nos ressources (alphabets, gestion
+des diacritiques et des majuscules, fichiers dans un encodage non connu).
+12/55
+1. get_text_from_file_name(file_name:str) → str | retourne, sous la forme d’une chaˆıne de ca-
+ract`eres, le texte du fichier de nom file_name et encod´e en utf8. Par exemple l’instruction de l’exemple
+affichera : "Всеобщая декларация ".
+>>> get_text_from_file_name(PATH_DH + "ruDh. txt ")[:20]
+2. get_text_from_file_name_with_encoding(file_name:str) → (dict, str) | D´etecte l’encodage du
+fichier de nom file_name ouvert sous sa forme binaire puis retourne le dictionnaire des informations sur
+l’encodage d´etect´e ainsi que le texte d´ecod´e sous la forme d’une chaˆıne de caract`ere. Vous utiliserez la
+fonction detect du module chardet et la fonction .decode associ´ee aux chaˆınes binaires. Par exemple
+le programme de l’exemple suivant affichera :
+Erreur d’encodage, doit s’appuyer sur les informations suivantes :
+{’encoding’: ’ISO-8859-5’, ’confidence’: 0.99, ’language’: ’Russian’}
+"Всеобщая декларация "
+>>> try :
+>>> get_text_from_file_name(PATH_DH + "ruDH_source. txt")
+>>> except UnicodeDecodeError :
+>>> "Erreur d’encodage , doit s ’appuyer sur les informations suivantes :"
+>>> finally :
+>>> info , text = get_text_from_file_name_with_encoding(PATH_DH + "ruDH_source. txt")
+>>> info
+>>> text [:20]
+3. get_basic_alphabet(alpha2_code:str) → str | Retourne une chaˆıne constitu´ee des caract`eres de la
+langue du pays dont le code sur 2 caract`eres est alpha2_code. Retourne "" si le code n’existe pas.
+Le chemin d’acc`es au fichier dans nos ressources est PATH_ALPHABET + {alpha2_code}_alphabet.txt).
+Vous capterez l’exception FileNotFoundError.
+>>> get_basic_alphabet( ’ fr ’) , get_basic_alphabet( ’en ’) , get_basic_alphabet( ’ru ’)
+("abcdefghijklmnopqrstuvwxyzœæ&", "abcdefghijklmnopqrstuvwxyz&", "")
+4. get_diacriticals(alpha2_code:str) → dict | Retourne un dictionnaire constitu´e des paires asso-
+ciant les lettres susceptibles d’ˆetre accentu´ees (cl´es) et leur(s) homologue(s) avec l’accent (valeurs) dans
+la langue du pays dont le code sur 2 caract`eres est alpha2_code. Retourne {} si le code n’existe pas. Le
+chemind’acc`esaufichierdansnosressourcesestPATH_ALPHABET + {alpha2_code}_diacriticals.txt).
+Vous utiliserez les fonctions str.join et list.split.
+>>> get_diacriticals ( ’ fr ’)
+¨
+i
+{’a ’: ’`aˆa ’ , ’e ’: ’´e`eˆe¨e ’ , ’i ’: ’ˆ
+i ’ , ’o ’: ’ˆo¨o ’ , ’u’: ’`uˆu¨u ’ , ’y ’: ’¨y ’ , ’c ’: ’¸c ’ , ’n’: ’˜n’}
+5. get_accented_letters(alpha2_code:str) → str | Retourne la chaˆıne des caract`eres accentu´es dans
+la langue du pays dont le code sur 2 caract`eres est alpha2_code. Retourne "" si le code n’est pas g´er´e
+par nos ressources. Vous utiliserez les fonctions str.join, dict.values et get_diacriticals.
+>>> get_accented_letters ( ’ fr ’)
+ˆ
+¨
+’`aˆa´e`eˆe¨e
+i
+iˆo¨o`uˆu¨u¨y¸c˜n’
+6. get_all_letters(alpha2_code:str) → str | Retourne une chaˆıne constitu´ee de toutes les lettres au-
+toris´ees par la langue du pays dont le code sur 2 caract`eres est alpha2_code. Retourne "" si le code n’est
+pas g´er´e par nos ressources. Vous utiliserez les fonctions get_basic_alphabet, get_accented_letter et
+str.upper.
+13/55
+ˆ
+i
+¨
+I
+ˆ
+¨
+`
+ˆ
+¨
+O
+O
+U
+U
+U
+>>> get_all_letters ( ’ fr ’)
+¨
+’abcdefghijklmnopqrstuvwxyzœæ &`aˆa¨a´e`eˆe¨e
+iˆo¨o`uˆu¨u¨y¸c˜nABCDEFGHIJKLMNOPQRSTUVWXYZ ŒÆ`
+ˆ
+¨
+´
+`
+ˆ
+¨
+ˆ
+A
+A
+A
+E
+E
+E
+E
+I
+¨
+˜
+Y¸C
+N’
+7. get_unaccented_letter(letter:char, diacriticals:dict) → char | Retourne le caract`ere letter
+mais sans les diacritiques du dictionnaire diacriticals et sans changer la casse de caract`ere. Vous
+utiliserez les fonctions dict.items, str.lower et str.upper.
+>>> diacriticals = get_diacriticals ( ’ fr ’)
+>>> get_unaccented_letter("` A", diacriticals ) , get_unaccented_letter("?", diacriticals )
+( ’A’ , ’? ’)
+8. get_unaccented_text(text:str, diacriticals:dict) → str | Retourne le texte de la chaˆıne text
+mais sans les diacritiques du dictionnaire diacriticals et sans changer la casse de caract`ere. Vous
+utiliserez get_unaccented_letter.
+>>> get_unaccented_letter("Bonne journ´ee `a tous et `a toutes ! `
+A tout `a l ’ heure ." ,
+diacriticals )
+"Bonne journee a tous et a toutes ! A tout a l ’ heure."
+9. get_letters_histogram(text:str, alpha2_code:str) → dict | Retourne le dictionnaire des occur-
+rencesdeslettresdetext.Toutesletexteestd’abordmisenbas-de-casseettouslesdiacritiquesremplac´es
+par leur homologue sans accent de la langue du pays dont le code sur 2 caract`eres est alpha2_code. Vous
+devrez ensuite utiliser la d´efinition en compr´ehension de dictionnaire et la fonction .count.
+>>> get_letters_histogram ( ’Bonne journ´ee `a tous et `a toutes ! ` A tout `a l ’ heure . ’ , ’fr ’)
+{’a ’: 4, ’b’: 1, ’c ’: 0, ’d’: 0, ’e ’: 7, ’f ’: 0, ’g ’: 0, ’h’: 1, ’i ’: 0, ’j ’: 1, ’k ’: 0,
+’l ’: 1, ’m’: 0, ’n’: 3, ’o ’: 5, ’p’: 0, ’q ’: 0, ’r ’: 2, ’s ’: 2, ’t ’: 6, ’u’: 5, ’v ’: 0,
+’w’: 0, ’x ’: 0, ’y ’: 0, ’z ’: 0, ’œ ’: 0, ’æ ’: 0, ’&’: 0}
+10. get_normalized_histogram(histogram:dict) → dict | Retourne histogram en rempla¸cant pour
+chaque lettre le nombre d’occurrences par la valeur normalis´ee entre 0 et 1 (arrondi au centi`eme).
+>>> get_normalized_histogram(get_letters_histogram ( ’Bonne journ´ee `a tous et `a toutes !
+` A tout `a l ’ heure . ’ , ’fr ’))
+{’a ’: 0.11 , ’b’: 0.03 , ’c ’: 0.0 , ’d’: 0.0 , ’e ’: 0.18 , ’f ’: 0.0 , ’g ’: 0.0 , ’h’: 0.03 ,
+’i ’: 0.0 , ’j ’: 0.03 , ’k ’: 0.0 , ’l ’: 0.03 , ’m’: 0.0 , ’n’: 0.08 , ’o ’: 0.13 , ’p’: 0.0 ,
+’q ’: 0.0 , ’r ’: 0.05 , ’s ’: 0.05 , ’t ’: 0.16 , ’u’: 0.13 , ’v ’: 0.0 , ’w’: 0.0 , ’x ’: 0.0 ,
+’y ’: 0.0 , ’z ’: 0.0 , ’œ ’: 0.0 , ’æ ’: 0.0 , ’&’: 0.0}
+11. add_figure_histogram(figure_axis:AxesSubplot, histogram:dict, is_sorted_by_freq:bool=
+False) | Ajoute un diagramme `a barre sur l’axe figure_axis d’une figure matplotlib. Ce diagramme
+repr´esentera l’histogramme de caract`eres histogram.
+Chaque barre repr´esentera le nombre d’occurrences (axe des Y ) des lettres (axe des X). Selon la valeur
+bool´eenne de is_sorted_by_freq les points seront ordonn´ees selon les valeurs croissantes des abscisses
+(False) ou selon les valeurs d´ecroissantes des ordonn´ees (True). Vous utiliserez les fonctions dict.items
+et list.sort ou sorted (en jouant avec les param`etres key et reverse).
+Le programme de l’exemple devra produire la figure suivante pour les 9 histogrammes calcul´es (3 dia-
+grammes par colonne pour 3 langues).
+14/55
+>>> fig , ax = plt . subplots (3 , 3, figsize =(15, 10))
+>>> for col , code in zip(range(3) , [ ’ fr ’ , ’en ’ , ’pl ’]):
+>>> ax [0][ col ]. set_title (code + " (basic / sorted / normalized)")
+>>> dh_text = get_text_from_file_name(PATH_DH + code + "DH. txt")
+>>> hist = get_letters_histogram(dh_text , code)
+>>> maxi = max( hist . values ())
+>>> ax [0][ col ]. set_ylim(0 , maxi)
+>>> add_figure_histogram(ax [0][ col ] , hist )
+>>> ax [1][ col ]. set_ylim(0 , maxi)
+>>> add_figure_histogram(ax [1][ col ] , hist , True)
+>>> ax [2][ col ]. set_ylim(0 , 1)
+>>> add_figure_histogram(ax [2][ col ] , get_normalized_histogram( hist ) , True)
+>>> plt .show()
+15/55
+3 CM03 (22/1/2024) - RAPPELS prog. imp´erative en Python 3.6>
+Notions vues en cours :
+— map, filter et listes/dictionnaires en compr´ehension
+— la structure de grille
+L’arborescence actuelle de vos dossiers et fichiers utiles aux TPs 5 et 6 devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | |_____ WISHES
+| | |
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| |_____ OUT |_____ WORDS
+| |_____ WG
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+import random
+3.1 TP05 - bases - listes en compr´ehension (1h)
+S03_TP05_template.py : fichier template `a compl´eter pour r´ealiser ce TP. L’objectif g´en´eral est de se familia-
+riser avec la notion de liste en compr´ehension en Python en manipulant une structure repr´esentant une famille
+sous la forme d’une liste de personnes. Chaque personne est elle mˆeme repr´esent´ee par un tuple qui aura la
+forme :
+person : (num_id, nom, pr´enom, date_naissance, date_d´ec`es, num_sexe, m´etier, num_id_p`ere,
+num_id_m`ere, num_id_conjoint)
+De plus les dates sont des tuples `a 3 valeurs enti`eres (num_jour, num_mois, num_ann´ee). Si la personne est
+encore vivante, sa date de d´ec`es est un tuple vide; num_sexe est de 0 pour les femmes et de 1 pour les hommes;
+les 3 num_id_XXX sont `a 0 si l’information n’est pas pertinente ou inconnue.
+16/55
+E.g : la variable ADAMS_FAMILY est utilis´ee pour les tests. L’arbre g´en´ealogique exploit´e est le suivant :
+Pierre -------------- Jeanne Andr´e (RIP) -------------- Giselle
+/ | \ |
+Pierrot Jeanette Ginette --------------- Joseph
+La famille ADAMS_FAMILY, de type list[person], sera donc repr´esent´ee ainsi :
+ADAMS_FAMILY = [
+(1, "Dupond", "Pierre", (4, 6, 1949), (), 1, "physicien", 0, 0, 2),
+(2, "Dupond", "Jeanne", (7, 6, 1949), (), 0, "physicienne", 0, 0, 1),
+(3, "Dupond", "Pierrot", (7, 6, 1969), (), 1, "informaticien", 1, 2, 0),
+(4, "Dupond", "Jeannette", (5, 4, 1970), (), 0, "informaticienne", 1, 2, 0),
+(5, "Durand", "Ginette", (4, 3, 1972), (), 0, "chimiste", 1, 2, 8),
+(6, "Durand", "Andr´e", (6, 3, 1948), (7, 5, 1968), 1, "chimiste", 0, 0, 7),
+(7, "Durand", "Giselle", (7, 5, 1949), (), 0, "chimiste", 0, 0, 6),
+(8, "Durand", "Joseph", (3, 2, 1968), (), 1, "m´edecin", 6, 7, 5)
+]
+L’objectif des 9 fonctions suivantes est d’extraire des informations en utilisant le plus possible les listes en
+compr´ehension du type [{map} for {var} in {sequence} {filter}] plutˆot que des boucles.
+1. get_living(family: list[person]) → list[person] | Retourne la liste de toutes les personnes vi-
+vantes de family.
+>>> get_living(ADAMS_FAMILY)
+[(1 , ’Dupond’ , ’Pierre ’ , (4 , 6, 1949), () , 1, ’physicien ’ , 0, 0, 2) ,
+(2 , ’Dupond’ , ’Jeanne ’ , (7 , 6, 1949), () , 0, ’physicienne ’ , 0, 0, 1) ,
+(3 , ’Dupond’ , ’Pierrot ’ , (7 , 6, 1969), () , 1, ’informaticien ’ , 1, 2, 0) ,
+(4 , ’Dupond’ , ’Jeannette ’ , (5 , 4, 1970), () , 0, ’informaticienne ’ , 1, 2, 0) ,
+(5 , ’Durand’ , ’Ginette ’ , (4 , 3, 1972), () , 0, ’chimiste ’ , 1, 2, 8) ,
+(7 , ’Durand’ , ’ Giselle ’ , (7 , 5, 1949), () , 0, ’chimiste ’ , 0, 0, 6) ,
+(8 , ’Durand’ , ’Joseph ’ , (3 , 2, 1968), () , 1, ’m´edecin ’ , 6, 7, 5)]
+2. get_gender_ranking(family: list[person]) → (list[person], list[person]) | Retourne le 2-
+uplet correspondant aux femmes (resp. aux hommes) de family.
+>>> get_gender_ranking(ADAMS_FAMILY)
+([(2 , ’Dupond’ , ’Jeanne ’ , (7 , 6, 1949), () , 0, ’physicienne ’ , 0, 0, 1) ,
+(4 , ’Dupond’ , ’Jeannette ’ , (5 , 4, 1970), () , 0, ’informaticienne ’ , 1, 2, 0) ,
+(5 , ’Durand’ , ’Ginette ’ , (4 , 3, 1972), () , 0, ’chimiste ’ , 1, 2, 8) ,
+(7 , ’Durand’ , ’ Giselle ’ , (7 , 5, 1949), () , 0, ’chimiste ’ , 0, 0, 6)] ,
+[(1 , ’Dupond’ , ’Pierre ’ , (4 , 6, 1949), () , 1, ’physicien ’ , 0, 0, 2) ,
+(3 , ’Dupond’ , ’Pierrot ’ , (7 , 6, 1969), () , 1, ’informaticien ’ , 1, 2, 0) ,
+(6 , ’Durand’ , ’Andr´e ’ , (6 , 3, 1948), (7 , 5, 1968), 1, ’chimiste ’ , 0, 0, 7) ,
+(8 , ’Durand’ , ’Joseph ’ , (3 , 2, 1968), () , 1, ’m´edecin ’ , 6, 7, 5)])
+17/55
+3. get_married_gender_proportion(family: list[person]) → (float, float) | Retourne le 2-uplet
+correspondant `a la proportion femmes mari´ees / femmes (resp. hommes mari´es / hommes) dans family.
+Il faudra obligatoirement utiliser get_gender_ranking.
+>>> get_married_gender_proportion(ADAMS_FAMILY)
+(0.75 , 0.75)
+4. get_death_age_average(family: list[person]) → float | Retourne la moyenne d’ˆage des d´ec`es
+dans la famille family en ne consid´erant que l’ann´ee.
+>>> get_death_age_average(ADAMS_FAMILY)
+20.0
+5. get_age_average(family: list[person], year: int) → float | Retourne la moyenne d’ˆage des
+personnes de family vivantes l’ann´ee year incluse. .
+>>> get_age_average(ADAMS_FAMILY, 1967)
+18.25
+>>> get_age_average(ADAMS_FAMILY, 1969)
+12.2
+6. get_deans(family: list[person]) → list[person] | Retourne la liste des doyens de family en ne
+tenant compte que de l’ann´ee de naissance.
+>>> get_deans(ADAMS_FAMILY)
+[(1 , ’Dupond’ , ’Pierre ’ , (4 , 6, 1949), () , 1, ’physicien ’ , 0, 0, 2) ,
+(2 , ’Dupond’ , ’Jeanne ’ , (7 , 6, 1949), () , 0, ’physicienne ’ , 0, 0, 1) ,
+(7 , ’Durand’ , ’ Giselle ’ , (7 , 5, 1949), () , 0, ’chimiste ’ , 0, 0, 6)]
+7. get_parents(ident: int, family: list[person]) → list[person] | Retourne la liste des parents
+de la personne d’identifiant ident dans family.
+>>> get_parents(3 , ADAMS_FAMILY)
+[(1 , ’Dupond’ , ’Pierre ’ , (4 , 6, 1949), () , 1, ’physicien ’ , 0, 0, 2) ,
+(2 , ’Dupond’ , ’Jeanne ’ , (7 , 6, 1949), () , 0, ’physicienne ’ , 0, 0, 1)]
+>>> get_parents(8 , ADAMS_FAMILY)
+[(6 , ’Durand’ , ’Andr´e ’ , (6 , 3, 1948), (7 , 5, 1968), 1, ’chimiste ’ , 0, 0, 7) ,
+(7 , ’Durand’ , ’ Giselle ’ , (7 , 5, 1949), () , 0, ’chimiste ’ , 0, 0, 6)]
+8. is_intersecting(family1: list[person], family2: list[person]) → bool | Retourne True si
+family1 et family2 ont au moins un membre en commun. False sinon.
+>>> is_intersecting ( living (ADAMS_FAMILY) , [p for p in ADAMS_FAMILY if p[4]])
+False
+>>> is_intersecting ( living (ADAMS_FAMILY) , deans(ADAMS_FAMILY))
+True
+9. is_sibling(id1: int, id2: int, family: list[person]) → bool | Retourne True si les personnes
+identifi´ees id1 et id2 ont au moins un parent en commun. False sinon. Il faudra obligatoirement utiliser
+is_intersecting et get_parents.
+>>> is_sibling (6 , 7, ADAMS_FAMILY) , is_sibling (3 , 4, ADAMS_FAMILY)
+(False , True)
+>>> is_sibling (4 , 5, ADAMS_FAMILY) , is_sibling (3 , 6, ADAMS_FAMILY)
+(True , False)
+18/55
+3.2 TP06 - bases - module grid_manager.py (2h)
+S03_TP06_template.py : fichier template `a compl´eter. La premi`ere ligne sert `a importer le module random.
+L’objectif g´en´eral de ce TP est de construire un module python compos´e de 21 fonctions de gestion de grille/tore.
+1. Mettre en place `a l’adresse https ://forge.info.unicaen.fr/projects/poo_tps_2023 un sous-projet
+sur la forge de l’universit´e. Il s’agira de synchroniser au fur et `a mesure de son´evolution votre dossier local
+TP_OO (`a renommer TP_OO_NOM_PRENOM), avec un d´epˆot distant GIT. Vous rajouterez votre encadrant de
+TP et votre enseignant de CM en membre manager du sous-projet.
+2. get_grid(line:int, column:int, value:Any) → list[list[Any]] | Retourne une grille de line
+lignes et column colonnes initialis´ees `a value.
+>>> GRID_CONST_TEST = get_grid(5 , 7, 0)
+>>> print(GRID_CONST_TEST)
+[[0 , 0, 0, 0, 0, 0, 0] , [0 , 0, 0, 0, 0, 0, 0] , [0 , 0, 0, 0, 0, 0, 0] ,
+[0 , 0, 0, 0, 0, 0, 0] , [0 , 0, 0, 0, 0, 0, 0]]
+3. get_random_grid(line:int, column:int, values:list[Any]) → list[list[Any]] | Retourne une
+grille de line lignes et column colonnes initialis´ees al´eatoirement avec des valeures de la liste values.
+>>> GRID_RANDOM_TEST = get_random_grid(5 , 7, range(2))
+>>> print(GRID_RANDOM_TEST)
+[[1 , 0, 1, 1, 0, 1, 0] , [1 , 0, 0, 0, 1, 1, 0] , [1 , 0, 1, 0, 0, 1, 0] ,
+[1 , 1, 0, 0, 1, 0, 0] , [0 , 1, 0, 1, 0, 0, 1]]
+4. get_lines_count(grid:list[list[Any]]) → int | Retourne le nombre de lignes de la grille grid.
+>>> get_lines_count(GRID_RANDOM_TEST)
+5
+5. get_columns_count(grid:list[list[Any]]) → int | Retourne le nombre de colonnes de la grille
+grid.
+>>> get_columns_count(GRID_RANDOM_TEST)
+7
+6. get_line(grid:list[list[Any]], line_number:int) → list[Any] | Retourne la ligne num´ero
+line_number de grid.
+>>> print(get_line(GRID_RANDOM_TEST, 1))
+[1 , 0, 0, 0, 1, 1, 0]
+7. get_column(grid:list[list[Any]], column_number:int) → list[Any] | Retourne la colonne
+num´ero column_number de grid.
+>>> print(get_column(GRID_RANDOM_TEST, 6))
+[0 , 0, 0, 0, 1]
+8. get_line_str(grid:list[list[Any]], line_number:int, separator:str) → str | Retourne la
+chˆıne de caract`ere correspondant `a la concat´enation des valeurs de la ligne num´ero line_number de
+la grille grid. Les caract`eres sont s´epar´es par la chaˆıne de caract`ere separator.
+>>> get_line_str(GRID_RANDOM_TEST, 2, ’\t ’)
+1 0 1 0 0 1 0
+19/55
+9. get_grid_str(grid:list[list[Any]], separator:str) → str | Retourne la chaˆıne de caract`ere
+repr´esentant la grille grid. Les caract`eres de chaque ligne sont s´epar´es par la cha¨ıne de caract`ere
+separator. Les lignes sont s´epar´ees par le caract`ere de retour `a la ligne \n.
+>>> get_grid_str(GRID_RANDOM_TEST, ’ ’)
+1011010
+1000110
+1010010
+1100100
+0101001
+10. get_diagonal:list[list[Any]]) → list[Any] | Retourne la diagonale de grid.
+>>> get_diagonal(GRID_RANDOM_TEST)
+[1 , 0, 1, 0, 0]
+11. get_anti_diagonal:list[list[Any]]) → list[Any] | Retourne l’anti-diagonale de grid.
+>>> get_anti_diagonal(GRID_RANDOM_TEST)
+[0 , 1, 0, 0, 0]
+12. has_equal_values(grid:list[list[Any]], value:Any) → bool | Teste si toutes les valeurs de grid
+sont ´egales `a value.
+>>> has_equal_values(GRID_CONST_TEST, 0) , has_equal_values(GRID_RANDOM_TEST, 0)
+(True , False)
+13. is_square(grid:list[list[Any]]) → bool | Teste si grid a le mˆeme nombre de lignes et de colonnes.
+>>> is_square(GRID_RANDOM_TEST)
+False
+14. get_count(grid:list[list[Any]], value:Any) → int | Retourne le nombre d’occurrences de value
+dans grid.
+>>> get_count(GRID_RANDOM_TEST, 1) == 16
+True
+15. get_sum(grid:list[list[Any]]) → Any | Retourne la somme de tous les ´el´ements de grid.
+>>> get_sum(GRID_RANDOM_TEST)
+True
+16. get_coordinates_from_cell_number(grid:list[list[Any]], cell_number:int) → tuple[int,
+int]] | Retourne le r´esultat de la conversion du num´ero de case cell_number de grid vers les
+coordonn´ees (ligne, colonne) correspondants.
+>>> get_coordinates_from_cell_number(GRID_RANDOM_TEST, 13)
+(1 , 6)
+17. get_cell_number_from_coordinates(grid:list[list[Any]], line_number:int,
+column_number:int) → int | Retourne le r´esultat de la conversion des coordonn´ees (line_number,
+column_number) de grid vers le num´ero de case correspondant.
+>>> get_cell_number_from_coordinates(GRID_RANDOM_TEST, 1, 6)
+13
+20/55
+18. get_cell(grid:list[list[Any]], cell_number:int) → int|Retournelavaleurdelacellulenum´ero
+cell_number de la grille grid.
+>>> get_cell(GRID_RANDOM_TEST, 9)
+0
+19. set_cell(grid:list[list[Any]], cell_number:int, value:Any) | Positionne `a la valeur value la
+case num´ero cell_number de la grille grid.
+>>> set_cell (GRID_RANDOM_TEST, 9, 1)
+>>> get_cell(GRID_RANDOM_TEST, 9)
+1
+20. get_same_value_cell_numbers(grid:list[list[Any]], value:Any) → list[int] | Retourne la
+liste des num´eros des cases `a valeur ´egale `a value dans la grille grid.
+>>> get_same_value_cell_numbers(GRID_RANDOM_TEST, 1)
+[0 , 2, 3, 5, 7, 9, 11, 12, 14, 16, 19, 21, 22, 25, 29, 31, 34]
+21. get_neighbour(grid:list[list[Any]], line_number:int, column_number:int, delta:[int,
+int], is_tore:bool) → Any | Retourne le voisin de la cellule grid[line_number][column_number].
+La d´efinition de voisin correspond `a la distance positionnelle indiqu´ee par le 2-uplet
+delta = (delta_line, delta_column). La case voisine est alors grid[line_number +
+delta_line][column_number + delta_column]. Si is_tore est `a True le voisin existe toujours
+en consid´erant grid comme un tore. Si is_tore est `a False retourne None lorsque le voisin est hors de
+la grille grid.
+>>> get_neighbour(GRID_RANDOM_TEST, 1, 6, (0 , 1) , True)
+1
+>>> get_neighbour(GRID_RANDOM_TEST, 1, 6, (0 , 1) , False)
+None
+22. get_neighborhood(grid:list[list[Any]], line_number:int, column_number:int,
+deltas:list[tuple[int, int]], is_tore:bool) → list[Any] | Retourne pour la grille grid la liste
+des N voisins de grid[line_number][column_number] correspondant aux N 2-uplet (delta_line,
+delta_column) fournis par la liste deltas. Si is_tore est `a True le voisin existe toujours en consid´erant
+grid comme un tore. Si is_tore est `a False un voisin hors de la grille grid n’est pas consid´er´e.
+>>> WIND_ROSE = ((−1, 0) , (−1, 1) , (0 , 1) , (1 , 1) , (1 , 0) , (1 ,−1), (0 ,−1), (−1,−1))
+>>> get_neighborhood(GRID_RANDOM_TEST, 1, 6, WIND_ROSE, True)
+[0 , 1, 1, 1, 0, 1, 1, 1]
+>>> get_neighborhood(GRID_RANDOM_TEST, 1, 6, WIND_ROSE, False)
+[0 , None, None, None, 0, 1, 1, 1]
+21/55
+4 CM04 (29/1/2024) - Des classes et des objets
+Notions vues en cours :
+— Classe/Type, Objets/Instances
+— Attributs/Param`etres, M´ethodes/Constructeur
+— Principe d’encapsulation/Adresse self/Op´erateur ’.’
+— Langages graphiques de mod´elisation/Unified Modeling Language - UML
+— Premi`ere exp´erimentation du principe d’association
+L’arborescence actuelle de vos dossiers et fichiers utiles aux TPs 7 et 8 devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | |_____ WISHES
+| | |
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| |_____ OUT |_____ WORDS
+| |_____ WG
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+|_____ S04_TP07_template.py
+| import random
+|_____ S04_TP08_template.py
+import random
+4.1 TP07 - De grid `a Grid (1h)
+S04_TP07_template.py : fichier template `a compl´eter pour r´ealiser ce TP. La seule ligne d’importation sert `a
+exploiter le module random.
+L’objectif g´en´eral de ce TP est de construire la classe Grid pour mod´eliser une grille d’entier en transposant
+autant que possible le travail d´ej`a effectu´e en programmation imp´erative au TP pr´ec´edent (module de gestion de
+grille grid_manager.py. Il faudra pour cela respecter le diagramme de classe et les exemples associ´es ci-apr`es.
+22/55
+Le main du template est compos´e des mˆemes constantes de test que pour grid_manager.py, reprises ci-dessous
+et augment´ees de 2 objets de type Grid (GRID_TEST et GRID_TEST2) et d’une modification pour la gestion du
+voisinnage.
+# Constantes de test
+>>> random. seed(1000) # Permet de g´en´erer toujours le ’mˆeme’ hasard pour les tests
+>>> NORTH, EAST, SOUTH, WEST = (−1, 0) , (0 , 1) , (1 , 0) , (0 ,−1)
+>>> NORTH_EAST, SOUTH_EAST, SOUTH_WEST, NORTH_WEST = (−1, 1) , (1 , 1) , (1 ,−1), (−1,−1)
+>>> CARDINAL_POINTS = (NORTH, EAST, SOUTH, WEST)
+>>> WIND_ROSE = (NORTH, NORTH_EAST, EAST, SOUTH_EAST, SOUTH, SOUTH_WEST, WEST, NORTH_WEST)
+>>> LINES_COUNT_TEST, COLUMNS_COUNT_TEST = 5, 7
+>>> LINE_NUMBER_TEST, COLUMN_NUMBER_TEST = 1, 6
+>>> CELL_NUMBER_TEST = 13
+>>> VALUE_TEST = 0
+>>> VALUES_TEST = list (range(2))
+>>> IS_TORE_TEST = True
+>>> DIRECTION_TEST = EAST
+>>> GRID_INIT_TEST = [[VALUE_TEST] ∗ COLUMNS_COUNT_TEST for _ in range(LINES_COUNT_TEST)]
+>>> CELL_SIZE_TEST = 100
+>>> MARGIN_TEST = 20
+>>> SHOW_VALUES_TEST = True
+>>> GRID_TEST = Grid(GRID_INIT_TEST)
+>>> GRID_TEST2 = Grid ([[1 for _ in range (10)] for _ in range (10)])
+23/55
+Le main propose sous forme d’assertions dans une syntaxe objet les mˆemes tests que pour grid_manager.py.
+>>> GRID_TEST. fill_random(VALUES_TEST)
+>>> print(GRID_TEST. get_line(LINE_NUMBER_TEST))
+[1 , 0, 0, 0, 1, 1, 0]
+>>> print(GRID_TEST.get_column(COLUMN_NUMBER_TEST))
+[0 , 0, 0, 0, 1]
+>>> print(GRID_TEST. get_diagonal ())
+[1 , 0, 1, 0, 0]
+>>> print(GRID_TEST. get_anti_diagonal ())
+[0 , 1, 0, 0, 0]
+>>> print(GRID_TEST. get_line_str (2))
+1 0 1 0 0 1 0
+>>> print(GRID_TEST. get_grid_str ( ’ ’))
+1011010
+1000110
+1010010
+1100100
+0101001
+>>> print(GRID_TEST. has_equal_values(GRID_INIT_TEST[0][0]))
+False
+>>> print(GRID_TEST2. has_equal_values(1))
+True
+>>> print(GRID_TEST. is_square ())
+False
+>>> print(GRID_TEST2. is_square ())
+True
+>>> print(GRID_TEST.get_count(1) == GRID_TEST.get_sum() == 16)
+True
+>>> print(GRID_TEST. get_coordinates_from_cell_number(13))
+(1 , 6)
+>>> print(GRID_TEST. get_cell_number_from_coordinates(LINE_NUMBER_TEST, COLUMN_NUMBER_TEST))
+13
+>>> print(GRID_TEST. get_cell (9))
+0
+>>> GRID_TEST. set_cell (9 , 1)
+>>> print(GRID_TEST. get_cell (9))
+1
+>>> print(GRID_TEST.get_same_value_cell_numbers(1))
+[0 , 2, 3, 5, 7, 9, 11, 12, 14, 16, 19, 21, 22, 25, 29, 31, 34]
+>>> print(GRID_TEST. get_neighbour(LINE_NUMBER_TEST, COLUMN_NUMBER_TEST, DIRECTION_TEST,
+IS_TORE_TEST))
+1
+>>> print(GRID_TEST. get_neighbour(LINE_NUMBER_TEST, COLUMN_NUMBER_TEST, DIRECTION_TEST,
+not IS_TORE_TEST))
+False
+>>> print(GRID_TEST. get_neighborhood(CELL_NUMBER_TEST, WIND_ROSE,
+IS_TORE_TEST))
+[0 , 5, 6, 7, 12, 14, 19, 20]
+>>> print(GRID_TEST. get_neighborhood(CELL_NUMBER_TEST, WIND_ROSE,
+not IS_TORE_TEST))
+[5 , 6, 12, 19, 20]
+Remarque :Une fois toutes les assertions pass´ees, n’h´esitez-pas `a exp´erimenter en cr´eant de nouveaux objets
+de type/classe Grid, en appliquant vos propre tests, voire en d´efinissant des m´ethodes suppl´ementaires.
+Attention :Cette classe sera la classe de base du projet fil rouge `a d´evelopper dans certains des TPs suivants.
+24/55
+4.2 TP08 - Des animaux et des hommes
+S04_TP08_template.py : fichier template `a compl´eter pour r´ealiser ce TP. La seule ligne d’importation sert `a
+exploiter le module random.
+L’objectif g´en´eral de ce TP est de construire les 3 classes Human, Cow et Dog en s’appuyant sur une mod´elisation
+possible des concepts d’humain, de vache et de chien. Il faudra pour cela respecter chaque diagramme de classe
+propos´e ainsi que les remarques et les exemples qui y sont associ´es. De plus les liens d’association entre les
+classes mod´elis´es par la figure suivante seront int´egr´es comme un attribut sp´ecifique des classes Cow et Dog.
+Remarque : il est souvent d’usage de mettre une seule classe par fichier. Au contraire, dans le cadre de cet
+exercice, vous coderez et ferez ´evoluer les 3 classes Human, Cow et Dog dans ce mˆeme module Python.
+4.2.1 La classe Human
+R´ealisez la classe Human de mani`ere `a ce qu’elle corresponde pr´ecis´ement au diagramme de classe, aux pr´ecisions
+apport´ees et aux tests associ´es.
+1. Initialisation des 5 attributs du constructeur :
+— full_name : concat´enation des pr´enoms du param`etre first_names entre eux puis au nom de famille
+du param`etre last_name
+— nationality : code de la nationalit´e sur deux lettre du param`etre alpha_code2
+25/55
+— greetings : valeur du param`etre greetings
+— age `a 0
+— majority : valeur du param`etre majority
+2. is_adult est `a True si la majorit´e est atteinte. False sinon.
+3. get_info d´ecline les informations d’identit´e
+4. ageing fait vieillir du nombre d’ann´ees years
+5. la valeur de get_shout s’am´eliore avec l’ˆage :
+— jusqu’`a 1 an : "Ouin ouin"
+— jusqu’`a 2 an : "Areuh baba gaga"
+— jusqu’`a 3 an : les salutations mais avec toutes les lettres m´elang´ees
+— `a partir de 3 ans : les salutations normales
+>>> random. seed(100)
+>>> farmer = Human(["Marcel", "Robert"] , "Duchamps", "fr ", "Bonjour", 18)
+>>> farmer . ageing(35)
+>>> print(farmer . get_info ())
+’ Identit´e : Marcel Robert Duchamps− Nationalit´e : FR− Age : 35 ans (majeur) ’
+>>> print(farmer . get_shout())
+’Bonjour ’
+>>> farmeress = Human(["Marcela"] , "Zpola", "pl", "Dzien dobry", 18)
+>>> farmeress . ageing(36)
+>>> print(farmeress . get_info ())
+’ Identit´e : Marcela Zpola− Nationalit´e : PL− Age : 36 ans (majeur) ’
+print(farmeress . get_shout())
+’Dzien dobry ’
+>>> boy = Human(["Marcel", "junior "] , "Duchamps Zpola", "fr ", "Bonjour")
+>>> print(boy. get_info ())
+’ Identit´e : Marcel junior Duchamps Zpola− Nationalit´e : FR− Age : 0 ans (mineur) ’
+>>> print(boy. get_shout())
+’Ouin ouin ’
+>>> boy. ageing ()
+print(boy. get_info ())
+’ Identit´e : Marcel junior Duchamps Zpola− Nationalit´e : FR− Age : 1 ans (mineur) ’
+>>> print(boy. get_shout())
+’Areuh baba gaga ’
+>>> boy. ageing ()
+>>> print(boy. get_info ())
+’ Identit´e : Marcel junior Duchamps Zpola− Nationalit´e : FR− Age : 2 ans (mineur) ’
+>>> print(boy. get_shout())
+’Bonrujo ’
+>>> boy. ageing ()
+>>> print(boy. get_info ())
+’ Identit´e : Marcel junior Duchamps Zpola− Nationalit´e : FR− Age : 3 ans (mineur) ’
+>>> print(boy. get_shout())
+’Bonjour ’
+4.2.2 Les classes Cow et Dog
+R´ealisez les classes Cow et Dog de mani`ere `a ce qu’elles correspondent aux diagrammes de classe, aux pr´ecisions
+apport´ees et aux tests associ´es.
+1. Les initialisations des attributs de Cow sont en lien direct avec les param`etres de mˆeme nom
+26/55
+2. get_info d´ecline les informations d’identit´e
+3. gain_weight et lose_weight font grossir et maigrir d’un poids weight
+4. take_owner change le propri´etaire par owner
+5. Une Cow fait "Meuh"
+>>> milk_cow = Cow("Agla¨e", 300, farmer)
+>>> milk_cow. gain_weight(30)
+>>> milk_cow. lose_weight(20)
+>>> print(milk_cow. get_info ())
+’Agla¨e : cow de 310 Kg. Appartient `a Marcel Robert Duchamps. ’
+>>> milk_cow.take_owner(farmeress)
+>>> print(milk_cow. get_info ())
+’Agla¨e : cow de 310 Kg. Appartient `a Marcela Zpola . ’
+>>> print(milk_cow. get_shout())
+’Meuh’
+Plutˆot qu’un poids, un Dog g´erera un ´etat state qui pourra avoir la valeur 0 (signifiant "cool") ou 1 (signifiant
+"en col`ere"). La m´ethode swap_state inverse l’´etat courant et selon le cas le cri produit par get_shout sera
+"Ouah ouah" ou "Grrr".
+>>> stray_dog = Dog("M´edor")
+>>> print(stray_dog. get_info ())
+"M´edor : dog cool . N’a pas de propri´etaire ."
+>>> print(stray_dog. get_shout())
+’Ouah ouah ’
+>>> stray_dog.take_owner(boy)
+>>> stray_dog.swap_state()
+>>> print(stray_dog. get_info ())
+"M´edor : dog en col`ere . Appartient `a Marcel junior Duchamps Zpola."
+>>> print(stray_dog. get_shout())
+’Grrr ’
+27/55
+5 CM05 (5/2/2024) - Protection, contrˆole d’acc`es, agr´egations
+Notions vues en cours :
+— Attributs priv´es/publics
+— Attributs d’instance/de classe
+— M´ethodes d’instance/de classe/statiques
+— Accesseurs en lecture/´ecriture
+— Relations d’associations/d’agr´egation/de composition
+L’arborescence actuelle de vos dossiers et fichiers utiles aux TPs 9 et 10 devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | | |_____ EN
+| | | |_____ ES
+| | | |_____ FR
+| | |
+| | |_____ BOOKS
+| | | |_____ EN
+| | | |_____ FR
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | | |_____ DH
+| | | |_____ WISHES
+| | |
+| | |_____ RESOURCES
+| | |_____ CHARACTERS
+| |_____ OUT |_____ WORDS
+| |_____ WG
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+|_____ S04_TP07_template.py
+|_____ S04_TP08_template.py
+|_____ S05_TP09_01_template.py
+| import random
+|_____ S05_TP09_02_template.py
+| import random
+|_____ S05_TP10_template.py
+import turtle
+5.1 TP09 - Reprises et privatisations (1h)
+Une fois les TP07 et TP08 termin´es, copiez et renommez les fichiers S04_TP07_template.py (classe Grid)
+et S04_TP08_template.py (classes Human, Cow et Dog) respectivement en S05_TP09_01_template.py et
+S05_TP09_02_template.py.
+28/55
+L’objectif de ce TP est de modifier dans les deux fichiers les classes et les tests en vous aidant des nouveaux
+diagrammes de classe propos´es. Il s’agira de respecter les ´etapes suivantes :
+1. priver tous les attributs.
+2. ajouter ´eventuellement les accesseurs en lecture et/ou en ´ecriture (selon les contraintes en rouge)
+3. tester et corriger les quelques m´ethodes et tests impact´es
+4. ajouter les 2 attributs et les 2 m´ethodes de classe demand´es dans Human. Trouver la m´ethode `a rendre
+statique dans Cow.
+5. rajouter la classe Farm
+6. ajouter vos propres tests
+5.2 Modifications de la classe Grid
+29/55
+5.3 Diagramme des classes Human, Cow et Dog et Farm
+Une ferme agr`ege au moins 1 humain et potentiellement des vaches et des chiens. Tous peuvent peupler aucune,
+une ou plusieurs fermes.
+30/55
+>>> farm = Farm("Fermarcel", farmer)
+>>> farm. populate(farmer)
+>>> farm. populate(farmeress)
+>>> farm. populate(boy)
+>>> farm. populate(milk_cow)
+>>> farm. populate(stray_dog)
+>>> print(farm. get_talk ())
+Les 5 habitants de la ferme Fermarcel se retrouvent :
+− Marcela Zpola : Dzien dobry
+− Agla¨e : Meuh
+− Marcel Robert Duchamps : Bonjour
+− Marcel junior Duchamps Zpola : Bonjour
+− M´edor : Grrr
+31/55
+5.4 TP10 - Exercices suppl´ementaires (2h)
+S05_TP10_template.py : fichier template `a cr´eer vous mˆeme pour r´ealiser les classes de ce TP.
+1. Codez les 2 classes suivantes en interpr´etant les noms des attributs et des m´ethodes, en respectant les
+diagrammes, en ´etudiant les exemples donn´es et en r´ealisant vos propres tests.
+Attention : Respectez pr´ecis´ement le typage demand´e
+range_test2 . get_size ())
+Remarque : Vous pourrez utiliser au mieux les fonctions built-in min et max.
+>>> range_test1 , range_test2 = Range(18.2 , 5) , Range(10, 20)
+>>> print(range_test1 . to_str ())
+[5 ,18.2]
+>>> print(range_test2 . to_str ())
+[10 ,20]
+>>> print(range_test1 . get_size () , 13.2 10
+>>> print(range_test1 .get_middle())
+11.6
+>>> print(range_test1 .get_union(range_test2 ). to_sttr ())
+[5 ,20]
+>>> print(range_test1 . has_intersection(range_test2 ))
+True
+>>> point_test1 , point_test2 = Point(1 , 1) , Point(−1, 1)
+>>> print(point_test1 . to_str ())
+(1 ,1)
+>>> print(point_test2 . to_str ())
+(−1,1)
+>>> point_test1 . translation(−1, 1)
+>>> print(point_test1 . to_str ())
+(0 ,2)
+>>> print(point_test1 . get_distance(point_test2) == 2 ∗∗ 0.5)
+True
+32/55
+2. R´ealisez de la mˆeme mani`ere la classe Segment
+Remarque :
+— translation d’un Segment doit utiliser translation d’un Point
+— get_length d’un Segment doit utiliser get_distance d’un Point
+— get_middle d’un Segment doit utiliser get_projection_x et get_projection_y
+Remarque : get_projetction_x (resp. get_projetction_y) produit un Range correspondant `a la
+projection du Segment sur l’axe des abscisses (resp. ordonn´ees).
+>>> segment_test = Segment(point_test1 , point_test2)
+>>> print(segment_test . to_str ())
+[(0 ,2);(− 1 ,1)]
+>>> segment_test . translation (2 , 1)
+>>> print(segment_test . to_str ())
+[(2 ,3);(1 ,2)]
+>>> print(segment_test . get_length() == 2 ∗∗ 0.5)
+True
+>>> print(segment_test . projection_x (). to_str ())
+[1 , 2]
+>>> print(segment_test . projection_y (). to_str ())
+[2 , 3]
+>>> print(segment_test .get_middle (). to_str ())
+(1.5 , 2.5)
+33/55
+3. Un syst`eme de Lindenmayer est un syst`eme de r´e´ecriture constitu´e d’un axiome (i.e. un mot initial) et
+d’un ensemble de r`egles qui sp´ecifie pour certains caract`eres quels mots (´eventuellement vides) vont les
+remplacer. A chaque ´etape, le mot courant est r´e´ecrit suivant ces r`egles.
+Exemple
+Soit l’axiome : ’fx’ et l’ensemble de r`egles : {’f’:”, ’x’:’-fx++fy-’, ’y’:’+fx--fy+’}.
+A chaque ´etape, chaque occurrence de ’f’ est remplac´ee par la chaˆıne vide (r`egle ’f’:”), chaque oc-
+currence de ’x’ est remplac´ee par ’-fx++fy-’ (r`egle ’x’:’-fx++fy-’) et chaque occurrence de ’y’ est
+remplac´ee par ’+fx--fy+’ (r`egle ’y’:’+fx--fy+’). Aucun changement pour les autres caract`eres.
+— A l’´etape 0, le mot initial est l’axiome ’fx’.
+— A l’´etape 1, le mot courant est ’-fx++fy-’.
+— A l’´etape 2, le mot courant est ’--fx++fy-+++fx--fy+-’
+—
+...
+Codez la classe LSystem en respectant le diagramme ci-apr`es.
+>>> AXIOM_TEST = ’fx ’ , RULES_TEST = {’f ’: ’ ’ , ’x ’: ’− fx++fy− ’, ’y ’: ’+fx−−fy+’}
+>>> LSystem(AXIOM_TEST, RULES_TEST). generate (3)
+−−−fx++fy− +++fx−−fy+− +++−fx++fy−−− +fx−−fy++−
+34/55
+4. Nous souhaitons faire une classe TurtleMemory avec un attribut principal de type Turtle dont les mou-
+vements seront command´es par des chaˆınes de caract`eres. Chaque caract`ere sera associ´e `a une action de
+la tortue :
+— ’f’ : la tortue avance d’une longueur length en pixel.
+— ’+’ : la tortue tourne `a gauche d’un angle angle en degr´e.
+— ’-’ : la tortue tourne `a droite d’un angle angle en degr´e.
+— ’[’ : la tortue ajoute sa position courante `a la fin d’une liste/pile stack.
+— ’]’ : la tortue se repositionne (sans dessiner) sur la derni`ere position m´emoris´ee dans la pile stack et
+la supprime de la liste. Il faut obligatoirement un nombre identique de caract`eres ’[’ et ’]’.
+Codez la classe d´ecrite par le diagramme ci-apr`es. Quelques exemples de la m´ethode draw_l_system
+sont donn´es par les exemples et images qui suivent pour dessiner un l_system en fonction d’un point de
+d´epart p, d’une longueur length associ´ee `a ’f’, d’un angle associ´e `a ’+’ et ’-’ et d’un nombre d’´etapes
+steps_count.
+>>> AXIOM_TEST = ’f−−f−−f ’ , RULES_TEST = {’f ’: ’ f+f−−f+f ’}
+>>> l_system_test = LSystem(AXIOM_TEST, RULES_TEST)
+>>> TurtleMemory().draw_l_system(l_system_test , 3, Point(−500, 100), 5, 60)
+>>> AXIOM_TEST = ’x’ , RULES_TEST = {’x’: ’ f[+x] f[−x]+x’ , ’f ’: ’ ff ’}
+>>> l_system_test = LSystem(AXIOM_TEST, RULES_TEST)
+>>> TurtleMemory().draw_l_system(l_system_test , 7, Point(−500, 100), 6, 10)
+35/55
+6 CM06 (12/2/2024) - H´eritage
+Notions vues en cours :
+— agr´egation forte (X est compos´e de Y)
+— H´eritage simple (X est une sorte de Y)
+— Classe m`ere/fille
+— Surcharges/red´efinitions
+— Sp´ecialisation d’attributs/de m´ethodes
+L’arborescence actuelle de vos dossiers et fichiers utiles aux TPs 11 et 12 devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | |
+| | |_____ BOOKS
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | |
+| | |_____ RESOURCES
+| |
+| |_____ OUT
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+|_____ S04_TP07_template.py
+|_____ S04_TP08_template.py
+|_____ S05_TP09_01_template.py
+|_____ S05_TP09_02_template.py
+|_____ S05_TP10_template.py
+|_____ S06_TP11.py
+| import random
+|_____ S06_TP12.py
+import random
+6.1 TP11 - h´eritage simple
+Une solution du TP S05_TP09_O1_template.py vous est propos´ee sur ecampus. Vous noterez l’ajout de deux
+m´ethodes proches de celles utiles pour la r´ecup´eration d’un voisin ou du voisinage d’une cellule. Les m´ethodes
+get_cell_neighbour_number et get_cell_neighborhood_numbers son diff´erentes `a deux niveaux :
+— un param`etre d’entr´ee est le num´ero de la cellule plutˆot que les num´eros de ligne et de colonne.
+— la sortie fournit la liste des num´eros de cellule tri´es par ordre croissant, plutˆot que leur contenu (car il
+est toujours possible de retrouver le contenu `a partir du num´ero mais pas forc´ement le contraire!)
+36/55
+L’objectifdeceTPestd’impl´ementerlaclassePlanetAlphapourrespecterlediagrammesuivant.Vousconstrui-
+rez vous-mˆeme un fichier S06_TP11.py ne contenant que la classe PlanetAlpha.
+Remarque : Dans les diagrammes de classe `a venir, pour ne pas surcharger les sch´emas, les attributs et
+m´ethodes ne seront pas toujours pr´ecis´es si la classe a d´ej`a ´et´e faite.
+La classe PlanetAlpha est une sp´ecialisation de Grid qui est construite `a partir du nombre de latitudes (lignes)
+et du nombre de longitudes (colonnes). Chaque cellule repr´esente une place sur la plan`ete qui peut ˆetre soit
+vide, soit occup´ee. Chaque case contient donc un caract`ere sp´ecifique. Celui par d´efaut qui correspond au sol
+(cellule libre) est fourni `a la cr´eation de la plan`ete et n’est pas modifiable.
+2 accesseurs en lecture des 2 attributs d’instance permettent de r´ecup´erer le nom de la plan`ete ainsi que le
+caract`ere utilis´e pour repr´esenter le sol.
+La m´ethode get_random_place permet de trouver une place non occup´ee, si elle existe, sur la plan`ete. Si il n’y
+a pas de place disponible,−1 est retourn´e.
+2 accesseurs en ´ecriture sont ´egalement `a d´efinir pour ajouter (sur une cellule libre donn´ee), ou retirer (d’une
+cellule occup´ee donn´ee) un ´el´ement. Dans les deux cas si l’op´eration `a pu se faire alors 1 est retourn´e. 0 Sinon.
+Enfin une m´ethode sp´eciale sera propos´ee pour l’affichage de la plan`ete comme propos´e dans la s´erie de tests
+ci-dessous.
+37/55
+>>> random. seed(10)
+>>> PLANET_TEST = PlanetAlpha("Terre", 5, 10, ’. ’)
+>>> INHABITANTS_TEST = {’D’: 7, ’C’: 3}
+>>> RESOURCES_TEST = {’E’: 10, ’H’: 20}
+>>> print(PLANET_TEST)
+Terre (0 habitants)
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+. . . . . . . . . .
+>>> for letter , letter_count in INHABITANTS_TEST. items ():
+>>> for _ in range(letter_count ):
+>>> PLANET_TEST.born(PLANET_TEST.get_random_free_place() , letter )
+>>> print(PLANET_TEST)
+Terre (10 habitants)
+D.D. . . . . . .
+. . . . .D. . . .
+C. . . . . . .D.
+..D.C.D.C.
+D. . . . . . . . .
+>>> for letter , letter_count in RESOURCES_TEST. items ():
+>>> for _ in range(letter_count ):
+>>> PLANET_TEST.born(PLANET_TEST.get_random_free_place() , letter )
+>>> print(PLANET_TEST)
+Terre : (40 habitants)
+D.D.EE.EHH
+HHE..DHH.H
+CEE.HHEHDH
+.HDHCEDHC.
+DHHE.EHHHH
+>>> print(PLANET_TEST. get_neighbour(0 , 0, PlanetAlpha .NORTH_WEST))
+H
+>>> print(PLANET_TEST. get_neighborhood(0 , 0, PlanetAlpha .CARDINAL_POINTS))
+[ ’D’ , ’. ’ , ’H’ , ’H’]
+>>> print(PLANET_TEST. get_neighborhood(0 , 0, PlanetAlpha .WIND_ROSE))
+[ ’D’ , ’H’ , ’. ’ , ’H’ , ’H’ , ’H’ , ’H’ , ’H’]
+>>> PLANET_TEST. die (0)
+>>> for cell in PLANET_TEST. get_cell_neighborhood_numbers(0 , PlanetAlpha .WIND_ROSE):
+>>> PLANET_TEST. die( cell )
+>>> print(PLANET_TEST)
+Terre (32 habitants)
+..D.EE.EH.
+..E..DHH..
+CEE.HHEHDH
+.HDHCEDHC.
+..HE.EHHH.
+>>> print(PLANET_TEST. get_neighborhood(0 , 0, PlanetAlpha .WIND_ROSE))
+[ ’. ’ , ’. ’ , ’. ’ , ’. ’ , ’. ’ , ’. ’ , ’. ’ , ’. ’]
+6.2 TP12 - Agr´egations et h´eritage par g´en´eralisation ou sp´ecialisation
+Faites une copie du fichier S05_TP09_02_template.py que vous renommerez S06_TP12.py . L’objectif de ce
+TP est d’ajouter et/ou modifier les classes n´ecessaires pour respecter le diagramme suivant.
+38/55
+1. Les classes French, English et Polish sp´ecialisent Human en fixant les param`etres de nationalit´e et de
+majorit´e.
+>>> farming_couple = (French(["Marcel", "Robert"] , "Duchamps") , Portuguese (["Marcela"] ,
+"Delcampos"))
+>>> english_tenant_farmer = English ([" Singlet "] , "Fromfield")
+>>> print(farming_couple [0]. get_shout())
+− Je m’ appelle Marcel Robert Duchamps et j ’ ai la nationalit´e fran¸caise . Bonjour !
+>>> print(farming_couple [1]. get_shout())
+− Je m’ appelle Marcela Delcampos et j ’ ai la nationalit´e portugaise . Bon Dia !
+>>> print(english_tenant_farmer . get_shout())
+− Je m’ appelle Singlet Fromfield et j ’ ai la nationalit´e anglaise . Hello !
+2. La classe Animal g´en´eralise Cow et Dog en regroupant les ´el´ements communs. Ces deux derni`eres classes
+devront ˆetre modifi´ees au minimum pour ˆetre construite par h´eritage de Animal. Les nouvelles classes
+Chicken et Cat peuvent alors ˆetre construites par sp´ecialisation de Animal.
+39/55
+>>> stray_dog = Dog("M´edor", state=1)
+>>> milk_cow = Cow("Agla¨e", 300, english_tenant_farmer)
+>>> print(stray_dog)
+M´edor n’a pas de propri´etaire . C’ est un chien en col`ere .
+>>> print(milk_cow)
+Agla¨e appartient `a Singlet Fromfield . C’ est une vache de 300 Kg.
+3. La classe Chicken sp´ecialise Animal en ajoutant la gestion d’un attribut pour le sexe (initialis´e
+al´eatoirement `a 0 pour une femelle et `a 1 pour un mˆale). Un tel animal fait en effet Cocorico quand
+c’est un mˆale mais cot cot cot si c’est une femelle. Rajoutez ´egalement la classe Cat qui ne sp´ecialise la
+classe Animal que par son cri (Ronron si il a un propri´etaire. Miaou sinon).
+>>> pullet = Chicken("Cocotte", 0, farming_couple [0])
+>>> cockerel = Chicken("Roadkill", 1, farming_couple [1])
+>>> print( pullet )
+Cocotte appartient `a Marcel Robert Duchamps. C’ est une poulette .
+>>> print( cockerel )
+Roadkill appartient `a Marcela Delcampos. C’ est un coquelet .
+>>> farm.populate_more(pullet , cockerel )
+>>> print(farm. get_talk ())
+Les habitants de la ferme Fermarcel se retrouvent :
+− Je m’ appelle Singlet Fromfield et j ’ ai la nationalit´e anglaise . Hello !
+− Je m’ appelle Marcel Robert Duchamps et j ’ ai la nationalit´e fran¸caise . Bonjour !
+− Je m’ appelle Marcela Delcampos et j ’ ai la nationalit´e portugaise . Bon Dia !
+− grrrrr !
+− Meuuuuuuuuuuuuuh !
+− cot cot cot codec !
+− cocorico !
+4. Contrˆoler une agr´egation forte (ou composition) en Python n’est pas ais´e en raison de la nature mˆeme
+du langage. Comment rendre au moins les tests des exemples propos´es coh´erents de ce point de vue avec
+le diagramme de classe?
+Remarque : Il s’agit de respecter la relation de composition demand´ee entre les classes Farm, Animal
+et Human. Cette question est li´ee au cycle de vie des objets : th´eoriquement, si un objet de la classe Farm
+est d´etruit alors les animaux qui le composent devraient l’ˆetre ´egalement mais pas les humains.
+40/55
+7 CM07 (4/3/2024) - Sp´ecialisations classes built-in, m´ethodes
+sp´eciales, POO et tkinter
+Notions vues en cours :
+— Bases du module tkinter : Tk, Button, Frame, Canvas, Label, Listbox
+— Sp´ecialisation d’une fenˆetre Tk
+— M´ethodes sp´eciales __repr__, __str__, __eq__
+L’arborescence actuelle de vos dossiers et fichiers utiles aux TPs 13 et 14 devrait suivre l’architecture suivante :
+TP_POO
+|
+|_____ TEXTS
+| |_____ IN
+| | |_____ ARTICLES
+| | |
+| | |_____ BOOKS
+| | |
+| | |_____ OTHERS
+| | |
+| | |_____ POLITICAL
+| | |
+| | |_____ RESOURCES
+| |
+| |_____ OUT
+|
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+|_____ S04_TP07_template.py
+|_____ S04_TP08_template.py
+|_____ S05_TP09_01_template.py
+|_____ S05_TP09_02_template.py
+|_____ S05_TP10_template.py
+|_____ S06_TP11.py
+|_____ S06_TP12.py
+|_____ S07_TP13_01.py
+| import tkinter as tk
+|_____ S07_TP13_02.py
+| import tkinter as tk
+|_____ S07_TP13_03.py
+| import tkinter as tk
+|_____ S07_TP14_01.py
+| import random
+|_____ S07_TP14_02.py
+| import random
+| from S06_TP11 import PlanetAlpha
+| from S07_TP14_1 import Ground, Water, Herb, Cow, Lion
+|_____ S07_TP14_03.py
+import tkinter as tk
+from S06_TP11 import PlanetAlpha
+from S07_TP14_1 import Ground, Water, Herb, Cow, Lion, Dragon
+41/55
+7.1 TP13 - Exercices tkinter
+7.1.1 Cr´eation d’une fenˆetre : version imp´erative
+S07_TP13_01.py . Importez-y le module classique tkinteren le renommant tk. Dans une
+1. Cr´eez le fichier partie if __name__ == "__main__", cr´eez les 5 constantes TITLE, WIDTH, , HEIGHT, POS_X, POS_Y avec
+par exemple les valeurs respectivement «test tkinter», 800, 500, 100 et 50. Faire `a la suite un programme
+qui cr´ee et affiche une fenˆetre dont le titre est TITLE, la largeur est de WIDTH pixels, la hauteur est de
+HEIGHT pixels et le coin haut/gauche est aux coordonn´ees (POS_X pixels, POS_Y pixels).
+2. Placez `a droite de l’interface un Button qui permet de quitter et fermer la fenˆetre.
+3. Placez dans l’interface une sous-fenˆetre (Frame) positionn´ee avant le bouton (celle-ci sera vide donc
+invisible). Un attribut f_main y fera r´ef´erence.
+4. Placez dans la sous-fenˆetre une surface de dessin (Canvas) blanche. Le r´esultat final doit correspondre `a
+la figure ci-dessous.
+7.1.2 Cr´eation d’une fenˆetre : version objet
+Modifiez le code pr´ec´edent dans un fichier S07_TP13_02.py pour le r´eorganiser avec la classe AppBase qui
+sp´ecialise la classe Tk du module tkinter comme dans le diagramme ci-dessous.
+Attention : Le r´esultat de l’ex´ecution du programme indiqu´e `a cˆot´e du diagramme doit ˆetre strictement
+identique `a la question pr´ec´edente.
+42/55
+7.1.3 Cr´eation d’une fenˆetre plus complexe
+L’objectif est de faire dans un fichier S07_TP13_03.py une nouvelle classe MyApp sp´ecialisant une fenˆetre Tk
+du module tkinter. Une instance de cette application graphique s’inspirera de la pr´ec´edente pour dessiner sur
+une surface de dessin la grille de type Grid pass´ee en param`etre.
+Le constructeur pr´eparera le Canvas `a la bonne taille en fonction des autres param`etres donn´ees : tailles en
+pixel des cases (formes carr´ees), des goutti`eres (distance entre les cases) et de la marge (distance avec la bordure
+de la surface de dessin). Le titre de la fenˆetre sera « Mon application d’affichage d’une grille ». Le constructeur
+termine par l’appel de la m´ethode draw_grid qui supprime tout ce qu’il y a sur le Canvas et y dessine la grille.
+La m´ethode draw_grid dessinera potentiellement les bordures de la grille (param`etre grid_lines `a True) et
+son contenu (param`etre content `a True). Les couleurs de l’interface (case vide, case remplie, lignes de la grille,
+texte des cases, textes des widgets) seront g´er´ees par un dictionnaire COLORS en constante de classe. La taille
+de la police de caract`ere du texte centr´e dans les cases d´ependra de la taille de la case (le quart). Le diagramme
+de classes et un exemple d’ex´ecution sont donn´es ci-dessous.
+43/55
+7.2 TP14 - Affichage d’une PlanetAlpha d’Element
+7.2.1 La hi´erarchie de classe Element
+En vous inspirant des TP pr´ec´edents, coder dans le fichier S07_TP14_01.py le diagramme de classes suivant.
+Remarque : Est ajout´ee `a Element la m´ethode sp´eciale ad´equate pour que la comparaison de deux objets
+avec le signe «== » s’appuie plutˆot sur leur classe et leur attribut char_repr que sur leur identit´e.
+Les tests ci-dessous doivent produire l’affichage indiqu´e par la figure qui suit.
+>>> print(Ground() , str (Ground()))
+>>> print(Ground() == str (Ground()))
+>>> print(Ground() == Ground())
+>>> print(Ground() is Ground())
+>>> TYPES_COUNT = {Herb: 2, Water: 3, Cow: 2, Dragon: 1, Lion: 5, Mouse: 10}
+>>> ELEMENTS_BY_TYPE = {element_type: [element_type() for _ in range(element_count )]
+for element_type , element_count in TYPES_COUNT. items()}
+>>> for element_type , elements in ELEMENTS_BY_TYPE. items ():
+>>> print(element_type.__name__, elements)
+44/55
+7.2.2 Application d’affichage alphanum´erique d’une PlanetAlpha d’Element
+En vous inspirant des tests du TP pr´ec´edent, cr´eez le fichier S07_TP14_02.py pour y coder la classe Main
+suivante. La constante de classe AUTHORIZED_TYPES permet de contrˆoler les classes d’Element qui peuvent
+peupler la plan`ete.
+Le code ci-dessous doit produire les affichages qui suivent.
+>>> random. seed(10)
+>>> app = Main("Terre", 5, 10)
+>>> app. populate({Lion: 7, Cow: 3})
+>>> app. populate({Water: 10, Herb: 100})
+>>> print(app)
+>>> nw_neighborhood = app. get_planet (). get_cell_neighborhood_numbers(0 , PlanetAlpha .WIND_ROSE)
+>>> app. get_planet (). die (0)
+>>> for cell in nw_neighborhood:
+>>> app. get_planet (). die( cell )
+>>> print(app)
+45/55
+7.2.3 Application d’affichage tkinter d’une PlanetAlpha d’Element
+S07_TP14_03.py En utilisant et en vous inspirant des classes de cette semaine, r´ealiser dans un fichier la classe
+suivante qui permet de construire une application qui sp´ecialise une fenˆetre Tk du module tkinter pour afficher
+dans un Canvas la simulation d’une PlanetAlpha compos´ee de classes « feuilles » de la hi´erarchie d’Element.
+L’interface aura ´egalement une Frame contenant des informations g´en´erales (un Label) et d´etaill´ees (Listbox).
+Le bouton « Quitter » sera ´egalement plac´e dans une Frame de gestion de l’application.
+La m´ethode get_types_cell_numbers retourne un dictionnaire dont les cl´es sont les classes autoris´ees et les
+valeurs leur nombre de repr´esentant. Elle sera utilis´ee pour les informations d´etaill´ees dans la Listbox.
+>>> LINES_COUNT = 20
+>>> COLUMNS_COUNT = 30
+>>> CELL_SIZE = 50
+>>> GUTTER_SIZE = 0
+>>> MARGIN_SIZE = 10
+>>> app = Main("Terre", LINES_COUNT, COLUMNS_COUNT, CELL_SIZE, GUTTER_SIZE, MARGIN_SIZE)
+>>> INHABITANTS_TEST = {Lion: 70, Cow: 30}
+>>> RESOURCES_TEST = {Water: 100, Herb: 1000}
+>>> app. populate(INHABITANTS_TEST)
+>>> app. populate(RESOURCES_TEST)
+>>> nw_neighborhood = app. get_planet (). get_cell_neighborhood_numbers(0 , PlanetAlpha .WIND_ROSE)
+>>> app. get_planet (). die (0)
+>>> for cell in nw_neighborhood:
+>>> app. get_planet (). die( cell )
+>>> app.draw_planet(False)
+>>> print(app)
+>>> app.mainloop()
+46/55
+Les deux derni`eres instructions du code ci-avant produisent respectivement les deux sorties alphanum´eriques et
+graphiques suivantes.
+8 CM08 (11/3/2024) - Multih´eritage, classes abstraites, interfaces,
+pr´esentation projet
+Notions vues en cours :
+— Sp´ecialisation d’un Canvas
+— S´election et modification d’un item dans un Canvas par l’ajout de tags
+— Multi-h´eritage Canvas et PlanetAlpha
+— Automates cellulaires de Conway et Turning Machine
+— Jeu du Snake
+— r´ediger un cahier des charges fonctionnel (pr´e-rapport)
+8.1 TP15 - De PlanetAlpha `a PlanetTk
+Il s’agira dans le fichier S08_TP15.py de proposer la classe PlanetTk `a la base du projet fil rouge. La classe
+doit ˆetre `a la fois une PlanetAlpha et un Canvas. La plan`ete ainsi con¸cue permettra de produire dans la console
+une plan`ete alphanum´erique d’Element mais ´egalement d’en afficher une grille comme dans le programme du
+TP pr´ec´edent.
+Une diff´erence toutefois concerne le choix graphique pour ´eviter de d´etruire et cr´eer trop souvent dans le
+Canvas des items pour dessiner les repr´esentants textuels des Element lorsqu’ils changent. De plus, par nature
+en tkinter, les ´el´ements dessin´es dans le Canvas sont des objets mais non directement r´ecup´erables car les
+m´ethodes de cr´eation d’un dessin sur un Canvas ne retournent qu’un identifiant de type int. Cet identifiant
+peut ˆetre utilis´e pour rechercher ou modifier les attributs d’un dessin `a travers de nombreuses m´ethodes des
+Canvas mais nous allons plutˆot utiliser une alternative avec l’utilisation de tags.
+47/55
+L’implantation devra respecter les indications suivantes :
+— le constructeur aura un param`etre indiquant l’ensemble des classes d’Element autoris´es sur la PlanetTk
+(l’Element Ground est syst´ematiquement ajout´e aux Element autoris´es).
+— chaque modification d’une case de la grille entraˆınera le changement appropri´e de la position, du texte ou
+de la couleur du dessin correspondant au nouvel Element contenu. Il s’agira de jouer avec les coordonn´es
+de l’item pour un d´eplacement; avec le repr´esentant textuel de l’Element pour la forme du dessin; avec
+les couleurs de fond (background_color) et de premier plan (foreground_color) du Canvas pour le
+rendre visible ou invisible.
+— chaque dessin se verra attribu´e un tag qui pourra se substituer `a un identifiant. L’int´erˆet est de pouvoir
+utiliser les m´ethodes sur tous les dessins qu’un tag donn´e s´electionne (voir exemple).
+Dans l’exemple du code ci-apr`es, le rectangle de 30 pixels de cˆot´e et positionn´e selon les coordonn´ees diagonaux
+10, 10, 40, 40 correspond dans la grille `a la cellule num´ero 3 qui contient un Dragon. Son dessin sur le Canvas
+c_gridest param´etr´e pour lui attribuer un tag’c_3’qui permettra de le rechercher uniquement avec le num´ero
+de cellule qui lui est associ´e. De mˆeme le texte (code utf-8 du Dragon) positionn´e en son centre sera param´etr´e
+pour lui attribuer le tags ’t_3’. Ceci permet par exemple de positionner cet ´el´ement au dessus de la pile des
+dessins du Canvas avec la m´ethode lift. Sans cette derni`ere instruction le symbole du dragon n’apparaˆıtrait
+pas car le rectangle a ´et´e (fort mal a propos) construit par dessus. Les couleurs du texte et du fond sont ensuite
+chang´ees ´egalement grˆace aux tags.
+>>> root = Tk()
+>>> c_grid = Canvas(root , bg="white", width=80, height=50)
+>>> c_grid .pack()
+>>> x, y, cell_number , cell_size , name = 10, 10, 3, 30, Dragon
+>>> c_grid . create_text(x + cell_size // 2, y + cell_size // 2, text=str (name()) ,
+tags=(f ’t_{cell_number} ’ ,))
+>>> c_grid . create_rectangle(x, y, x + cell_size , y + cell_size , tags=(f ’c_{cell_number} ’ ,))
+>>> c_grid . lift ( ’t_3’)
+>>> c_grid . itemconfigure ( ’t_3’ , f i l l="dark blue")
+>>> c_grid . itemconfigure ( ’c_3’ , f i l l="yellow")
+>>> root .mainloop()
+Figure 1 – Affichage du rectangle et du texte sans ou avec l’instruction lift
+Attention : le programme devra g´erer toutes les modifications d’affichage des Element en maintenant ce
+syst`eme de tags.
+Remarque : les m´ethodes de modification ou d’obtention d’un attribut de widgtet sont cget et configure.
+Pour modifier ou obtenir l’attribut d’un dessin il faut `a la place utiliser les m´ethodes de Canvas itemcget et
+itemconfigure. D’autres m´ethodes comme gettags peuvent ´egalement ˆetre utiles.
+48/55
+L’arborescence actuelle de vos dossiers et fichiers utiles au TP 15 devrait suivre l’architecture suivante :
+TP_POO
+|_____ TEXTS
+|_____ config.py
+|_____ S01_TP01_template.py
+|_____ S01_TP02_template.py
+|_____ S02_TP03_template.py
+|_____ S02_TP04_template.py
+|_____ S03_TP05_template.py
+|_____ S03_TP06_template.py
+|_____ S04_TP07_template.py
+|_____ S04_TP08_template.py
+|_____ S05_TP09_01_template.py
+|_____ S05_TP09_02_template.py
+|_____ S05_TP10_template.py
+|_____ S06_TP11.py
+|_____ S06_TP12.py
+|_____ S07_TP13_01.py
+|_____ S07_TP13_02.py
+|_____ S07_TP13_03.py
+|_____ S07_TP14_01.py
+|_____ S07_TP14_02.py
+|_____ S07_TP14_03.py
+|_____ S08_TP15.py
+import tkinter as tk
+from S06_TP11_planetalpha import PlanetAlpha
+from S07_TP14_1_element import *
+Le diagramme des classes final est d´ecrit ci-apr`es.
+49/55
+8.2 Pr´esentation du projet
+Il s’agira de construire 3 classes sp´ecialisant PlanetTk et de les int´egrer dans une classe MyApp qui permette de
+tester graphiquement chacune d’elle selon le diagramme des classes suivant.
+Les supports d´ecrivant les r`egles de construction des 3 classes Conway, Turmites et SnakeGame sont fonc-
+tionnellement d´ecrites dans les 3 sous-sections suivantes. A vous de les traduire en python orient´e objet en
+respectant/exploitant/augmentant au mieux l’architecture impos´ee.
+8.2.1 Automate cellulaire / Jeu de la vie / jeu de Conway
+Selon wikipedia un automate cellulaire consiste en une grille r´eguli`ere de « cellules » contenant chacune un
+« ´etat » choisi parmi un ensemble fini et qui peut ´evoluer au cours du temps. L’´etat d’une cellule au temps
+t+1 est fonction de l’´etat au temps t d’un nombre fini de cellules appel´e son « voisinage ». Un des automates
+cellulaires le plus c´el`ebre est celui d’un jeu « `a z´ero joueur » : le jeu de la vie, parfois nomm´e du nom de son
+inventeur, le jeu de Conway (https://fr.wikipedia.org/wiki/Jeu_de_la_vie).
+Le jeu de la vie sera simul´e par une PlanetTk qui ne peut avoir qu’un unique type d’habitant : les Human.
+Ceux-ci n’ont aucune capacit´e de d´eplacement mais peuvent naˆıtre ou mourir selon certaines conditions de leur
+voisinage (les 8 cellules adjacentes horizontalement, verticalement et diagonalement).
+´
+Les r`egles d’´evolution SIMULTAN
+EE dans toutes les cases sont les suivantes :
+— une cellule libre poss´edant exactement 3 voisins de type Human entraˆıne une naissance sur la cellule libre,
+sinon elle n’´evolue pas;
+— une cellule occup´ee par un Human et poss´edant 2 ou 3 voisins de type Human n’´evolue pas
+— une cellule occup´ee par un Human et poss´edant plus de 3 voisins de type Human meurt par ´etouffement
+— une cellule occup´ee par un Human et poss´edant moins de 2 voisins de type Human meurt par isolement
+50/55
+Attention : la simultan´eit´e de l’´evolution implique qu’`a l’instant t, l’´evolution d’une case ne doit pas influer
+sur le voisinage d’une autre (et donc sur son ´evolution). Il faudra donc ´evaluer le voisinage sur une copie de la
+grille pour faire les modifications ´eventuelles dans la grille originale.
+Remarque : l’existence d’un Human dans la cellule courante `a t+1 d´epend de la v´eracit´e `a t du bool´een :
+S == 3 or E == 1 and S == 2
+avec S le nombre de Human dans le voisinage (de 0 `a 8) et E le nombre de Human sur la cellule courante (0 ou 1)
+Voicicidessousunexempled’´evolutiond’uneplan`eteavecdesconfigurationsded´epartparticuli`eresquisemblent
+faire ´emerger des animations se reproduisant ind´efiniment `a l’identique : la premi`ere sur place en 2 ´etapes (un
+« clignotant » de la cat´egorie des « oscillateurs ») et la seconde avec un mouvement diagonal en 4 ´etapes (un
+« planeur » de la cat´egorie des « vaisseaux »)
+8.2.2 Turning Machine / Fourmi de Langton / Turmites
+51/55
+L’automate cellulaire de la fourmi de Langton sera repr´esent´e par un drˆole d’animal, une Turmite, qui se d´eplace
+sur une grille en laissant ou effa¸cant une trace color´ee dans les cases visit´ees. Quand elle est sur une case blanche,
+elle tourne de 90 degr´e vers la droite et avance d’une case en laissant une trace color´ee sur la cellule quitt´ee.
+Quand elle est sur une case color´ee, elle tourne de 90 degr´e vers la gauche et avance d’une case en retirant la
+trace color´ee de la cellule quitt´ee.
+La figure pr´ec´edente pr´esente le cheminement d’une seule Turmite laissant une trace noire et d´emarrant sur un
+plan tout blanc. Aux ´etapes 97, 185 et 360, les dessins des cases noires ont un centre de sym´etrie. Apr`es un
+comportement complexe pendant 10102 ´etapes, elle avance en diagonale de fa¸con r´ep´etitive par cycles de 104
+´etapes : c’est « l’autoroute ».
+Tout se complique lorsqu’il y a plus d’une fourmi. Il apparaˆıt notamment des cycles. En (a) de la figure ci-
+dessous sont indiqu´ees les 28 ´etapes qu’empruntent cycliquement deux fourmis plac´ees initialement cˆote `a cˆote
+sur un plan blanc. Parfois, chaque fourmi construit son autoroute. Ainsi, en (b), deux fourmis, apr`es une p´eriode
+confuse, construisent chacune leur autoroute. On est alors tent´e de g´en´eraliser et de conjecturer que plusieurs
+fourmisdonnentsoituncycle,soitplusieursautoroutes.Cetteconjectureesth´elasfausse:descroissancesinfinies
+autres que l’autoroute apparaissent. La cr´eation d’un carr´e qui grandit ind´efiniment en laissant son int´erieur
+vide est l’un de ces comportements infinis non r´ep´etitifs (c).
+52/55
+Une Turmite est en fait une fourmi sur un plan o`u, au lieu d’une seule trace color´ee, il y a n couleurs possibles
+(par exemple quatre), auxquelles sont associ´ees n rotations (par exemple +90, +90, –90, –90, auquel cas la
+Turmite est not´ee 1100). Les Turmite dont le code des rotations ne comporte que des doubles 0 et des doubles 1
+(par exemple 1100, 111100, 00110011, etc.) ont l’extraordinaire propri´et´e de produire r´eguli`erement des dessins
+sym´etriques.
+La figure ci-dessous montre quelques-unes de ces ´etapes sym´etriques dont la Turmite 1100 (a). Les Turmite
+donnent naissance `a des dynamiques tr`es diff´erentes et produisent des dessins ´etonnants que l’on peut voir
+comme un art automatique impr´evisible. Les images propos´ees ont ´et´e r´ealis´ees avec un programme de Dean
+Tersigni (voir www.thealmightyguru.com/Wiki/index.php?title=Langton%27s_ant).
+53/55
+8.2.3 Jeu du Snake
+Le jeu du snake, de l’anglais signifiant « serpent », est un genre de jeu vid´eo dans lequel le joueur dirige un
+serpent qui grandit et constitue ainsi lui-mˆeme un obstacle. Le joueur contrˆole une longue et fine ligne semblable
+`a un serpent, qui doit potentiellement slalomer entre des obstacles qui pars`ement le niveau. Pour gagner chacun
+des niveaux, le joueur doit faire manger `a son serpent un certain nombre de pastilles similaire `a de la nourriture,
+allongeant `a chaque fois la taille du serpent. Alors que le serpent avance inexorablement, le joueur ne peut
+que lui indiquer une direction `a suivre (tourner `a gauche ou `a droite par rapport `a sa direction courante) afin
+d’´eviter que la tˆete du serpent ne touche les murs ou son propre corps, auquel cas il risque de mourir. Certaines
+variantes proposent des niveaux de difficult´e dans lesquels varient l’aspect du niveau (simple ou labyrinthique),
+le nombre de pastilles `a manger, l’allongement du serpent ou encore sa vitesse.
+Le jeu sera ici aussi construit `a partir de PlanetTk et un Element Snake dont les param`etres suppl´ementaires
+sontlataille,lavitesseetladirectionded´epart.Unelistedecasescontigu¨espermettradeconserverl’information
+delapositioncourantedechaquemorceauduserpent;lavaleurenposition0 correspondantaunum´erodecellule
+de la tˆete.
+Pour faire avancer le serpent il faudra d´evelopper une programmation ´ev´enementielle en assignant :
+— la fonction de d´emarrage/arrˆet du serpent `a la barre espace du clavier
+— la fonction de tourner de 90 degr´e vers la gauche au bouton gauche de la souris
+— la fonction de tourner de 90 degr´e vers la droite au bouton droit de la souris
+Remarque : Pour faire avancer le serpent dans la direction courante, il ne faut pas d´eplacer toutes les cases
+mais 1 seule! Pour y parvenir, il suffit, `a chaque ´evolution de la grille, de d´eplacer la case de queue du serpent
+sur la cellule vers laquelle doit se diriger la tˆete du serpent.
+8.3 D´emarrage projet
+Une fois par groupe de 2 ou 3 il s’agit de cloner un d´epˆot GIT sur la forge de l’universit´e AU BON ENDROIT et
+de rajouter en membre propri´etaire du projet votre encadrant de TP et moi-mˆeme. Il faut ensuite r´efl´echir
+au diff´erentes fonctionnalit´es et am´elioration `a rajouter aux versions de base de la classe Element et des
+sp´ecialisations de PlanetTk et se r´epartir le travail sous la forme d’un cahier des charges fonctionnels.
+8.3.1 R´ediger un cahier des charges fonctionnel
+Tous les membres d’un groupe doivent obligatoirement s’appuyer sur les mˆemes classes de base du d´epˆot. Pour
+leur r´ealisation individuelle ils devront ajouter des classes et des m´ethodes au bons endroits pour maximiser la
+coh´erence et factoriser au mieux le code.
+54/55
+En plus des bases `a r´ealiser, plusieurs parties du programme final peuvent ˆetre d´ecrites sous la forme de
+fonctionnalit´es suppl´ementaires. Les exemples ci-dessous ne sont ni obligatoires, ni exhaustifs.
+— jeu de Conway : affichage d’informations sur l’´etat du plateau, programmation ´ev´enementielle pour
+construire une configuration de d´epart `a la souris, permettre aux Human de mourir de vieillesse, ...
+— Turmites : affichage d’informations, fonctionnalit´es d´ecrites dans la sous-section pour am´eliorer la fourmi
+de Langton jusqu’aux vraies Turmite en passant par la possibilit´e de plusieurs fourmis...
+— GameSnake : gestion de la mort, des obstacles, des niveaux, du score, de la nourriture qui fait grandir, du
+poison qui fait r´etr´ecir voire mourir, de l’acc´el´eration...
+— interface MyApp : toute la partie de gestion du jeu, des plan`etes, des ´el´ements...
+— nouvelles r`egles pour une autre plan`ete...
+Les fonctionnalit´es de base incluent les 3 sp´ecialisations quelque soit le nombre de personnes dans le groupe.
+Le fait d’ˆetre 2 ou 3 pourra en revanche avoir un impact que sur les fonctionnalit´es suppl´ementaires que vous
+proposez dans votre pr´e-rapport.
+Attention : Toutes les classes et m´ethodes devront ˆetre correctement associ´ees `a des docstrings et une
+documentation minimale automatique sera g´en´er´ee avec un module tel que pydoc pr´esent´e lors du CM10
+Remarque : Chaque docstring devrait contenir le ou les auteurs de la classe/m´ethode comment´ee afin que
+l’information apparaisse directement dans la documentation g´en´er´ee
+8.3.2
+´
+Evaluation
+Date limite de remise du pr´e-rapport (cahier des charges fonctionnel) : date du dernier TP de la semaine du 11
+mars + 6 jours
+Date limite de remise du rapport (explication des diff´erences entre les pr´evisions du pr´e-rapport et le travail
+accompli) : vendredi de la semaine pr´ec´edent celle des oraux (environ 10mn maximum par´etudiant pr´esentation,
+questions et discussions comprises).
+Attention : Bar`eme uniquement indicatif
+(se r´ef´erer en priorit´e aux indications donn´ees par votre encadrant de TP sur le processus `a suivre pour
+l’´evaluation orale) :
+— 8 points sur les fonctionnalit´es de base montr´ees en cours pour exploiter obligatoirement les classes finales
+des TP (PlanetTk et Element) dans les trois sp´ecialisations demand´ees.
+— 6 `a 8 points sur la qualit´e du pr´e-rapport, du rapport final et des fonctionnalit´es suppl´ementaires. Cette
+notepeutˆetreindividualis´eesilar´epartitiondutravailesttr`esd´es´equilibr´eesansjustificationspertinentes.
+— 4 `a 6 points pour l’oral sur la qualit´e de votre investissement individuel (utilisation du GIT, capacit´e
+`a expliquer votre code et l’architecture globale, justification des diff´erences ´eventuelles d´ecrites dans le
+rapport final entre ce qui ´et´e pr´evu dans le pr´e-rapport et ce qui a ´et´e r´eellement fait.
+Exemple pour le projet fil rouge de cette ann´ee :
+55/55
