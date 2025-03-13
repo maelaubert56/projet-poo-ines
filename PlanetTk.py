@@ -58,7 +58,7 @@ class PlanetTk:
         Returns:
             The root widget.
         """
-        return root
+        return self.__root
 
     def get_background_color(self):
         """
@@ -67,7 +67,7 @@ class PlanetTk:
         Returns:
             The background color.
         """
-        return background_color
+        return self.__background_color
 
     def get_foreground_color(self):
         """
@@ -76,7 +76,7 @@ class PlanetTk:
         Returns:
             The foreground color.
         """
-        return foreground_color
+        return self.__foreground_color
 
     def born(self, cell_number, element):
         """
@@ -149,6 +149,7 @@ class PlanetTk:
         Returns:
             PlanetAlpha: The grid object.
         """
+        print("hello1")
         return self.__planetAlpha
 
     def __repr__(self):

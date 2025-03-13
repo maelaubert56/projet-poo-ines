@@ -1,7 +1,11 @@
 import tkinter as tk
+from tkinter import messagebox
 from Conway import Conway
 from Human import Human
 import random
+
+from Snake import Snake
+from SnakeGame import SnakeGame
 
 class MyApp(tk.Tk):
     """
@@ -15,8 +19,8 @@ class MyApp(tk.Tk):
     """
     COLORS = {'cell_background': 'white',
               'cell_foreground': 'black',
-              'grid_lines':'black',
-              'grid_text':'black',
+              'grid_lines':'gray',
+              'grid_text':'white',
               'widget_text': 'orange'}
 
     def __init__(self, grid, cell_size, gutter_size=0, margin_size=10):
@@ -26,6 +30,7 @@ class MyApp(tk.Tk):
         self.cell_size = cell_size
         self.gutter_size = gutter_size
         self.margin_size = margin_size
+        self.current_game = None  # Add this line
         self.draw_menu()
 
     def draw_menu(self):
@@ -85,9 +90,10 @@ class MyApp(tk.Tk):
                                bg=self.COLORS['cell_background'])
         self.c_draw.pack()
         
-        # Add click binding
-        self.c_draw.bind('<Button-1>', self.on_canvas_click)
-
+        # Only bind click for Conway's Game
+        if isinstance(grid, Conway):
+            self.c_draw.bind('<Button-1>', self.on_canvas_click)
+        
         # Replace quit button with back button
         self.b_back = tk.Button(self.f_main,
                                text='Back to Menu',
@@ -104,6 +110,8 @@ class MyApp(tk.Tk):
         # Clear game frame
         if hasattr(self, 'f_main'):
             self.f_main.destroy()
+            
+        self.current_game = None  # Add this line
         
         # Redraw menu
         self.draw_menu()
@@ -136,6 +144,7 @@ class MyApp(tk.Tk):
         self.clear_game()
         grid_size = len(self.grid.get_grid())
         self.conway_grid = Conway(grid_size, grid_size)
+        self.current_game = 'conway'  # Add this line
         self.setup_game(self.conway_grid)
         
         # Add control frames
@@ -224,8 +233,82 @@ class MyApp(tk.Tk):
         pass
 
     def start_snake(self):
-        # Add logic to start Snake
-        pass
+        """Initialize and start Snake game"""
+        self.clear_game()
+        grid_size = len(self.grid.get_grid())
+        self.snake_game = SnakeGame(grid_size, grid_size)
+        self.current_game = 'snake'
+        self.setup_game(self.snake_game)
+        
+        # Bind controls
+        self.bind('<space>', lambda e: self.toggle_snake())
+        self.bind('<Button-1>', lambda e: self.snake_game.rotate_left())
+        self.bind('<Button-3>', lambda e: self.snake_game.rotate_right())
+        # Add keyboard controls
+        self.bind('<Left>', lambda e: self.snake_game.set_direction('Left'))
+        self.bind('<Right>', lambda e: self.snake_game.set_direction('Right'))
+        self.bind('<Up>', lambda e: self.snake_game.set_direction('Up'))
+        self.bind('<Down>', lambda e: self.snake_game.set_direction('Down'))
+        
+        # Add score display
+        self.score_label = tk.Label(self.f_main, 
+                                  text="Score: 0",
+                                  font=('Arial', 16, 'bold'))
+        self.score_label.pack(side=tk.TOP, pady=5)
+        
+        self.draw_grid(True)
+
+    def toggle_snake(self):
+        """Toggle snake movement with spacebar"""
+        if self.snake_game.toggle_running():
+            self.snake_step()
+
+    def snake_step(self):
+        """Execute snake game step"""
+        if self.snake_game.step():
+            self.score_label.config(text=f"Score: {self.snake_game.get_score()}")
+            self.draw_grid(True)
+            self.after(150, self.snake_step)
+        elif self.snake_game.handle_game_over():
+            if messagebox.askyesno("Game Over", 
+                                 f"Score: {self.snake_game.get_score()}\nVoulez-vous recommencer?"):
+                self.start_snake()
+
+    def reset_snake(self):
+        """Reset snake game"""
+        if hasattr(self, 'snake_game'):
+            self.snake_game.reset()
+            self.score_label.config(text="Score: 0")
+            self.draw_grid(True)
+            self.snake_step()
+
+    def show_snake_rules(self):
+        """Display snake game rules"""
+        rules_window = tk.Toplevel(self)
+        rules_window.title("Snake Game Rules")
+        rules_window.geometry("400x300")
+        
+        rules_text = """Snake Game Rules:
+
+- Use arrow keys or WASD to control the snake
+- Eat food to grow and increase score
+- Avoid hitting walls
+- Avoid hitting yourself
+- Try to get the highest score!
+
+Controls:
+- Arrow keys or WASD: Move snake
+- New Game: Start a new game
+"""
+        
+        text_widget = tk.Text(rules_window, wrap=tk.WORD, padx=10, pady=10)
+        text_widget.insert("1.0", rules_text)
+        text_widget.config(state=tk.DISABLED)
+        text_widget.pack(expand=True, fill=tk.BOTH)
+        
+        tk.Button(rules_window, 
+                 text="Close", 
+                 command=rules_window.destroy).pack(pady=5)
 
     def refresh_grid(self):
         """Refresh the grid display"""
@@ -241,16 +324,41 @@ class MyApp(tk.Tk):
             y = i*(self.cell_size + self.gutter_size) + self.margin_size
             
             cell_content = self.grid.get_cell(cell_number)
-            is_human = isinstance(cell_content, Human)
             
             if grid_lines:
-                fill_color = self.COLORS['cell_background'] if is_human else self.COLORS['cell_foreground']
-                self.c_draw.create_rectangle(x, y, x + self.cell_size, y + self.cell_size,
-                                          outline=self.COLORS['grid_lines'],
-                                          fill=fill_color)
+                if isinstance(cell_content, Snake):
+                    if cell_content.is_food:
+                        fill_color = SnakeGame.COLORS['food']
+                        self.c_draw.create_rectangle(x, y, x + self.cell_size, y + self.cell_size,
+                                                  outline=self.COLORS['grid_lines'],
+                                                  fill=fill_color)
+                        self.c_draw.create_text(x + self.cell_size/2,
+                                              y + self.cell_size/2,
+                                              text='🍎',
+                                              fill='white',
+                                              font=('Arial', int(self.cell_size/2)))
+                    else:
+                        # Vérifier d'abord si le serpent est mort
+                        if hasattr(cell_content, 'is_dead') and cell_content.is_dead:
+                            fill_color = SnakeGame.COLORS['dead_head'] if cell_content.is_head else SnakeGame.COLORS['dead_body']
+                        else:
+                            fill_color = SnakeGame.COLORS['head'] if cell_content.is_head else SnakeGame.COLORS['body']
+                        self.c_draw.create_rectangle(x, y, x + self.cell_size, y + self.cell_size,
+                                                  outline=self.COLORS['grid_lines'],
+                                                  fill=fill_color)
+                elif isinstance(cell_content, Human):
+                    fill_color = self.COLORS['cell_foreground']
+                    self.c_draw.create_rectangle(x, y, x + self.cell_size, y + self.cell_size,
+                                              outline=self.COLORS['grid_lines'],
+                                              fill=fill_color)
+                else:
+                    fill_color = self.COLORS['cell_background']
+                    self.c_draw.create_rectangle(x, y, x + self.cell_size, y + self.cell_size,
+                                              outline=self.COLORS['grid_lines'],
+                                              fill=fill_color)
                 
-                # Draw age if enabled and cell contains Human
-                if hasattr(self, 'show_age') and self.show_age.get() and is_human:
+                # Draw age if enabled and cell contains Human (except food)
+                if hasattr(self, 'show_age') and self.show_age.get() and isinstance(cell_content, Human) and cell_content.get_full_name() != 'Food':
                     self.c_draw.create_text(x + self.cell_size/2,
                                           y + self.cell_size/2,
                                           text=str(cell_content.get_age()),

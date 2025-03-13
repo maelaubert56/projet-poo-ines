@@ -23,6 +23,7 @@ class Conway:
 
     def get_grid(self):
         """Return the underlying PlanetAlpha grid object."""
+        print("hello")
         return self.__planet.get_grid()
 
     def step(self):

@@ -1,7 +1,8 @@
 import random
+from Element import Element
 
 
-class Human:
+class Human(Element):
     """
     Represents a Human entity in the simulation.
     
@@ -23,7 +24,7 @@ class Human:
         """Return the total number of Human instances created."""
         return cls.__count
 
-    def __init__(self, first_names, last_name, alpha_code2, greetings, majority=18):
+    def __init__(self, first_names, last_name, alpha_code2, greetings, majority=18, kinds=['Human'], name='Human', char_repr='H', sound='Hi'):
         """
         Initialize a Human instance.
         
@@ -34,6 +35,10 @@ class Human:
             greetings (str): Greeting message
             majority (int, optional): Age of majority. Defaults to 18
         """
+        super().__init__(char_repr)
+        self.kinds = kinds
+        self.name = name
+        self.sound = sound
         self.__full_name = " ".join(map(str,[" ".join(first_names),last_name]))
         self.__age = 0
         self.__majority = majority
